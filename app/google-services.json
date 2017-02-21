@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "678858278454",
+    "firebase_url": "https://maschinance.firebaseio.com",
+    "project_id": "maschinance",
+    "storage_bucket": "maschinance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678858278454:android:df5bc05d98ff9d3b",
+        "android_client_info": {
+          "package_name": "com.example.lukasadler.test1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678858278454-852lbaougaitogj9t8foit5jab65c5u5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXyLMn1n06aK_wh_Ny5vryF5TiMmRr3Ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
