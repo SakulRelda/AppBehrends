@@ -1,83 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_create_machine"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.lukasadler.test1.CreateMachineActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imageViewNewMachine"
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMachine"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:srcCompat="@android:drawable/ic_menu_report_image" />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewNewMachine"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:srcCompat="@android:drawable/ic_menu_report_image" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
             android:background="@color/colorTeal"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:text="Neue Maschine"
-            android:textColor="@color/colorTeal"
-            />
-        <EditText
-            android:id="@+id/machineName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:text="Maschinenname"
-            android:textColor="@color/colorTeal"
-            android:textColorHint="@color/colorTeal"
-            />
-        <EditText
-            android:id="@+id/machineTyp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:text="Maschinen Typ"
-            android:textColor="@color/colorTeal"
-            android:textColorHint="@color/colorTeal"
-            />
-        <EditText
-            android:id="@+id/machineLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:text="Maschinen Standort"
-            android:textColor="@color/colorTeal"
-            android:textColorHint="@color/colorTeal"
-            />
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/machineName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textStyle="italic"
+                android:hint="Maschinenname"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_name"
+                android:drawablePadding="8dp"
+                android:textColor="@color/accent"
+                android:textColorHint="@color/accent"/>
+
+            <EditText
+                android:id="@+id/machineTyp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="italic"
+                android:hint="Maschinentyp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_type"
+                android:drawablePadding="8dp"
+                android:textColor="@color/accent"
+                android:textColorHint="@color/accent" />
+
+            <EditText
+                android:id="@+id/machineLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="italic"
+                android:hint="Maschinenstandort"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="8dp"
+                android:textColor="@color/accent"
+                android:textColorHint="@color/accent"
+                />
 
 
+            <Button
+                android:id="@+id/btnCreateMachine"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/accent"
+                android:background="@color/colorOrange"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/speichern_text"/>
 
-        <Button
-        android:id="@+id/btnCreateMachine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:background="@color/colorTeal"
-        android:layout_gravity="center_horizontal"
-
-        android:text="@string/speichern_text"/>
-
+        </LinearLayout>
 
     </LinearLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabOpenCameraMachine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_camera"
+        app:backgroundTint="@color/colorOrange"
+        app:layout_anchor="@id/linearLayoutMachine"
+        app:layout_anchorGravity="bottom|right|end" />
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabBarcodeScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_barcode"
+        app:backgroundTint="@color/colorOrange"
+        app:layout_anchor="@id/linearLayoutMachine"
+        app:layout_anchorGravity="bottom|left|end" />
+
+</android.support.design.widget.CoordinatorLayout>

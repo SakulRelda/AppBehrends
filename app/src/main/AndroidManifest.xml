@@ -23,9 +23,9 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SummaryActivity" />
-        <activity android:name=".CreateMachineActivity" />
+        <activity android:name=".CreateMachineActivity" android:label="Neue Maschine" />
         <activity android:name=".MachineMaintenanceActivity" />
-        <activity android:name=".CreateMaintenanceActivity"></activity>
+        <activity android:name=".CreateMaintenanceActivity"/>
     </application>
 
 </manifest>
