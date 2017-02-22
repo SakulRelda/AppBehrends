@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
+            android:background="@color/colorLightGrey"
             android:orientation="horizontal">
 
             <ImageView
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:background="@color/colorTeal"
+            android:background="@color/accent"
             android:orientation="vertical">
 
             <EditText
@@ -42,8 +43,8 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="8dp"
-                android:textColor="@color/accent"
-                android:textColorHint="@color/accent"/>
+                android:textColor="@color/colorTeal"
+                android:textColorHint="@color/colorTeal"/>
 
             <EditText
                 android:id="@+id/machineTyp"
@@ -55,8 +56,8 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_type"
                 android:drawablePadding="8dp"
-                android:textColor="@color/accent"
-                android:textColorHint="@color/accent" />
+                android:textColor="@color/colorTeal"
+                android:textColorHint="@color/colorTeal" />
 
             <EditText
                 android:id="@+id/machineLocation"
@@ -68,8 +69,8 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="8dp"
-                android:textColor="@color/accent"
-                android:textColorHint="@color/accent"
+                android:textColor="@color/colorTeal"
+                android:textColorHint="@color/colorTeal"
                 />
 
 
@@ -80,7 +81,7 @@
                 android:layout_marginTop="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/accent"
-                android:background="@color/colorOrange"
+                android:background="@color/colorTeal"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/speichern_text"/>
 
@@ -95,7 +96,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_camera"
-        app:backgroundTint="@color/colorOrange"
+        app:backgroundTint="@color/colorTeal"
         app:layout_anchor="@id/linearLayoutMachine"
         app:layout_anchorGravity="bottom|right|end" />
 
@@ -106,7 +107,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_barcode"
-        app:backgroundTint="@color/colorOrange"
+        app:backgroundTint="@color/colorTeal"
         app:layout_anchor="@id/linearLayoutMachine"
         app:layout_anchorGravity="bottom|left|end" />
 
