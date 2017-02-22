@@ -41,11 +41,13 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_maintenance);
 
+        //READ INTENT VALUE
         Intent intent = getIntent();
         if(intent!=null){
             detailedMachine = (Machine) intent.getSerializableExtra("Machine");
+        }else{
+            return;
         }
-
 
         //GET VIEWS
         txtMachineLocation = (TextView) findViewById(R.id.lblMachineLocation);
@@ -54,7 +56,11 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listMaintenance);
         fab = (FloatingActionButton) findViewById(R.id.fabAddMaintenance);
 
+        //SET VALUES FOR THE MACHINE VIEW
+        setValues(detailedMachine);
 
+        //FIREBASE HANDLER
+        handler = FirebaseHandler.getInstance();
         ArrayList<RepairHistory> repHisto = handler.readMaintenance(detailedMachine.getI_ID());
         MaintenanceAdapter adapter = new MaintenanceAdapter(this, repHisto);
         listView.setAdapter(adapter);
@@ -72,11 +78,22 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MachineMaintenanceActivity.this,CreateMaintenanceActivity.class);
+                intent.putExtra("Machine", detailedMachine);
                 startActivity(intent);
             }
         });
 
 
+    }
+
+    /**
+     * Adds the Values to the View
+     * @param m
+     */
+    public void setValues(Machine m){
+        txtMachineName.setText(m.getS_Name());
+        txtMachineLocation.setText(m.getS_MachineLocation());
+        txtMachineType.setText(m.getS_Machinentyp());
     }
 
 

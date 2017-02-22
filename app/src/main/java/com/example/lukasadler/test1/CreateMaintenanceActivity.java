@@ -25,7 +25,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private EditText txtRepairDesc;
     private FloatingActionButton fab;
     private Button saveMaintenance;
-    private FirebaseHandler handler;
+    private FirebaseHandler handler = FirebaseHandler.getInstance();
     private Machine machine;
 
     @Override
@@ -36,6 +36,8 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent!=null){
             machine = (Machine) intent.getSerializableExtra("Machine");
+        }else{
+            return;
         }
 
 
@@ -47,6 +49,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.fabAddMaintenance);
         saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
 
+        //INIT FIREBASE HANDLER
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
