@@ -24,8 +24,10 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private TextView txtRepairDate;
     private EditText txtRepairDesc;
     private FloatingActionButton fab;
+    private FloatingActionButton fabCamera;
+    private FloatingActionButton fabBarCode;
     private Button saveMaintenance;
-    private FirebaseHandler handler = FirebaseHandler.getInstance();
+    private FirebaseHandler handler;
     private Machine machine;
 
     @Override
@@ -34,7 +36,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_maintenance);
 
         Intent intent = getIntent();
-        if(intent!=null){
+        if(intent!= null){
             machine = (Machine) intent.getSerializableExtra("Machine");
         }else{
             return;
@@ -47,16 +49,19 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         txtRepairDate = (TextView) findViewById(R.id.txtRepairDate);
         txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
         fab = (FloatingActionButton) findViewById(R.id.fabAddMaintenance);
+        fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
+        fabBarCode = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMaintenance);
         saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
 
         //INIT FIREBASE HANDLER
+        handler = FirebaseHandler.getInstance();
 
-        fab.setOnClickListener(new View.OnClickListener() {
+/*        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //OPEN CAMERA
             }
-        });
+        });*/
 
         saveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
