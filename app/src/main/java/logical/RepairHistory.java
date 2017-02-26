@@ -1,5 +1,7 @@
 package logical;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,18 +18,29 @@ public class RepairHistory implements Serializable{
     private String s_machineID;
     private RepairImage r_image;
     private String s_author;
+    private Bitmap image;
+
 
 
     public RepairHistory() {
     }
 
-    public RepairHistory(Date d_repairDate, String s_ID, String s_Description, String s_machineID, RepairImage r_image, String s_author) {
+    public RepairHistory(Date d_repairDate, String s_ID, String s_Description, String s_machineID, RepairImage r_image, String s_author, Bitmap image) {
         this.d_repairDate = d_repairDate;
         this.s_ID = s_ID;
         this.s_Description = s_Description;
         this.s_machineID = s_machineID;
         this.r_image = r_image;
         this.s_author = s_author;
+        this.image = image;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getS_ID() {

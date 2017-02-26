@@ -92,7 +92,7 @@ public class SummaryActivity extends AppCompatActivity {
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS NO
-                                Toast.makeText(SummaryActivity.this, model.getS_Name(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SummaryActivity.this, "DELETED", Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.show();
@@ -119,12 +119,19 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,0);
 
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 0){
+            Toast t = Toast.makeText(this, "Maschine erstellt",Toast.LENGTH_SHORT);
+            t.show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

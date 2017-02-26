@@ -3,6 +3,7 @@ package com.example.lukasadler.test1;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
 import database.FirebaseHandler;
 import logical.Machine;
 
@@ -32,6 +36,7 @@ public class CreateMachineActivity extends AppCompatActivity {
     private FloatingActionButton fab_Camera;
     private FloatingActionButton fab_BarcodeScanner;
     private final int REQUEST_IMAGE_CAPTURE = 1;
+    private Machine machine = new Machine();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +82,15 @@ public class CreateMachineActivity extends AppCompatActivity {
         btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Machine m = new Machine();
-                m.setS_Machinentyp(s_machineType.getText().toString());
-                m.setS_Name(s_machineName.getText().toString());
-                m.setS_MachineLocation(s_machineLocation.getText().toString());
+                machine.setS_Machinentyp(s_machineType.getText().toString());
+                machine.setS_Name(s_machineName.getText().toString());
+                machine.setS_MachineLocation(s_machineLocation.getText().toString());
                 FirebaseUser user = handler.getFirebaseUser();
-                m.setI_uID(user.getUid());
-                handler.saveMachine(m);
+                machine.setI_uID(user.getUid());
+                handler.saveMachine(machine);
                 finishActivity(0);
+                onBackPressed();
+
             }
         });
     }
@@ -95,13 +101,13 @@ public class CreateMachineActivity extends AppCompatActivity {
             Bundle extra = data.getExtras();
             Bitmap imageBit = (Bitmap) extra.get("data");
             img_Machine.setImageBitmap(imageBit);
+            //machine.setImage(imageBit.createScaledBitmap(imageBit,20,20,true));
         } else {
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (scanningResult != null) {
                 String scanContent = scanningResult.getContents();
                 String scanFormat = scanningResult.getFormatName();
-                Log.d("Content Barcode", scanContent);
-                Log.d("Format Barcode", scanFormat);
+                machine.setS_BarcodeValue(scanContent);
             } else {
                 Toast t = Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_SHORT);
                 t.show();
