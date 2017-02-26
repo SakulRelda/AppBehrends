@@ -24,21 +24,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import database.FirebaseHandler;
 import logical.Machine;
-import styleviews.StyledTextView;
 
 public class SummaryActivity extends AppCompatActivity {
 
     protected FloatingActionButton floatingButton;
     protected LinearLayout linearLayout;
-
-    final ArrayList<Machine> machines = new ArrayList<>();
+    protected ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,48 +48,83 @@ public class SummaryActivity extends AppCompatActivity {
         Window w = this.getWindow();
         w.setStatusBarColor(this.getResources().getColor(R.color.colorTeal));
 
+        //GET VIEWS
         floatingButton = (FloatingActionButton) findViewById(R.id.fab);
         linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
+        list = (ListView) findViewById(R.id.listen);
 
-        final FirebaseHandler h = FirebaseHandler.getInstance();
-        final FirebaseUser u = h.getFirebaseUser();
-        Log.d("Summary","Done");
+        //LIFETIME LISTENER FOR THE DATABASE
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
+        FirebaseListAdapter<Machine> firebaseListAdapter = new FirebaseListAdapter<Machine>(
+                this,
+                Machine.class,
+                R.layout.list_item,
+                ref) {
+            @Override
+            protected void populateView(View v, final Machine model, int position) {
+                TextView txtView = (TextView) v.findViewById(R.id.listItemTitle);
+                txtView.setText(model.getS_Name());
+                ImageView imgViewEdit = (ImageView) v.findViewById(R.id.listItemEdit);
+                ImageView imgViewDelete = (ImageView) v.findViewById(R.id.listItemDelete);
 
-        ArrayList<Machine> m = h.readMachines();
-        MachineAdapter machines = new MachineAdapter(this,m);
-        ListView list = (ListView) findViewById(R.id.listen);
-        list.setAdapter(machines);
+                imgViewEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //EDIT LOGIC
+                    }
+                });
+
+                imgViewDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //DELETE LOGIC
+                        AlertDialog.Builder dia = new AlertDialog.Builder(v.getRootView().getContext());
+                        dia.setTitle(R.string.delete_machine);
+                        dia.setMessage(R.string.delete_machine_text);
+                        dia.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //DELETE PRESS YES
+                                Toast.makeText(SummaryActivity.this, model.getS_Name(), Toast.LENGTH_SHORT).show();
+                                FirebaseHandler h = FirebaseHandler.getInstance();
+                                h.deleteMachine(model);
+                            }
+                        });
+                        dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //DELETE PRESS NO
+                                Toast.makeText(SummaryActivity.this, model.getS_Name(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dia.show();
+                    }
+                });
+            }
+        };
+        list.setAdapter(firebaseListAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object item = parent.getItemAtPosition(position);
-                if(item instanceof Machine){
-                    Machine m = (Machine) item;
-                    Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
-                    intent.putExtra("Machine",m);
-                    startActivity(intent);
-
-                    //Toast.makeText(getApplicationContext(),m.getS_Name(),Toast.LENGTH_LONG);
-                }
+                 if(item instanceof Machine) {
+                     Machine m = (Machine) item;
+                     Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
+                     intent.putExtra("Machine", m);
+                     startActivity(intent);
+                 }
             }
         });
+
 
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
                 startActivity(intent);
-                //startActivity(createMachine);
-                //Machine m = new Machine();
-                //m.setI_uID(u.getUid());
-                //m.setS_Name("Maschinen Versuch");
-                //m.setS_Machinentyp("Fraesmaschine");
-                //h.saveMachine(m);
 
             }
         });
-        Log.d("Summary","Done");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,9 +140,9 @@ public class SummaryActivity extends AppCompatActivity {
             case R.id.logOutMenu:
                 FirebaseHandler h = FirebaseHandler.getInstance();
                 boolean logout = h.logOutUser();
-                if(logout){
+                if (logout) {
                     Intent intent = new Intent(SummaryActivity.this
-                            ,MainActivity.class);
+                            , MainActivity.class);
                     startActivity(intent);
                 }
                 return true;
@@ -114,88 +150,4 @@ public class SummaryActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-    public class MachineAdapter extends ArrayAdapter {
-
-
-        private Context context;
-        private int resource;
-        public Activity activity;
-        private List list;
-
-        public MachineAdapter(Context context, int resource, Activity act) {
-            super(context, resource);
-            this.context = context;
-            this.resource = resource;
-            this.activity = act;
-
-        }
-
-        /**
-         *
-         * @param context - Context like the Main Activity or something else
-         * @param list - List with Items for the Adapter
-         */
-        public MachineAdapter(Context context, List list){
-            //0--> Kein vordefiniertes Layout
-            super(context,0,list);
-            this.context = context;
-            this.resource = 0;
-            this.list = list;
-
-        }
-
-        @NonNull
-        @Override
-        public View getView(int pos, View convertView, final ViewGroup parent){
-            if(convertView==null){
-                convertView = getLayoutInflater().inflate(R.layout.list_item, null);
-            }
-            TextView txtView = (TextView) convertView.findViewById(R.id.listItemTitle);
-            final Machine m = (Machine) getItem(pos);
-            txtView.setText(m.getS_Name());
-            ImageView imgViewEdit = (ImageView) convertView.findViewById(R.id.listItemEdit);
-            ImageView imgViewDelete = (ImageView) convertView.findViewById(R.id.listItemDelete);
-
-            imgViewEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //EDIT LOGIC
-                }
-            });
-
-            imgViewDelete.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    //DELETE LOGIC
-                    AlertDialog.Builder dia = new AlertDialog.Builder(v.getRootView().getContext());
-                    dia.setTitle(R.string.delete_machine);
-                    dia.setMessage(R.string.delete_machine_text);
-                    dia.setPositiveButton(R.string.ja_text,new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface arg0, int arg1){
-                            //DELETE PRESS YES
-                            Toast.makeText(SummaryActivity.this,m.getS_Name(),Toast.LENGTH_SHORT).show();
-                            FirebaseHandler h = FirebaseHandler.getInstance();
-                            h.deleteMachine(m);
-                        }
-                    });
-                    dia.setNegativeButton(R.string.nein_text,new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface arg0, int arg1){
-                            //DELETE PRESS NO
-                            Toast.makeText(SummaryActivity.this,m.getS_Name(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    dia.show();
-                }
-            });
-
-            return convertView;
-
-        }
-
-
-    }
-
-
 }

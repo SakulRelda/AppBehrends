@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -107,8 +108,16 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
     private class MaintenanceAdapter extends ArrayAdapter
     {
 
+        private Context context;
+        private int resource;
+        public Activity activity;
+        private List list;
         public MaintenanceAdapter(Context context, List list){
+
             super(context,0);
+            this.list = list;
+            this.context = context;
+            this.resource = 0;
         }
 
         public MaintenanceAdapter(Context context, int resource) {

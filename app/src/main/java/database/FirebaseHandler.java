@@ -117,6 +117,11 @@ public class FirebaseHandler {
         return true;
     }
 
+    /**
+     *
+     * @param machineID
+     * @return
+     */
     public ArrayList<RepairHistory> readMaintenance(final String machineID){
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         ChildEventListener childEventListener = mDatabaseRef.addChildEventListener(new ChildEventListener() {
@@ -179,38 +184,14 @@ public class FirebaseHandler {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                machines.clear();
-                if (dataSnapshot.getKey().equals("Machine")) {
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        String key = snap.getKey();
-                        Machine m = snap.getValue(Machine.class);
-                        machines.add(m);
-                    }
-                }
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                machines.clear();
-                if (dataSnapshot.getKey().equals("Machine")) {
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        String key = snap.getKey();
-                        Machine m = snap.getValue(Machine.class);
-                        machines.add(m);
-                    }
-                }
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                machines.clear();
-                if (dataSnapshot.getKey().equals("Machine")) {
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        String key = snap.getKey();
-                        Machine m = snap.getValue(Machine.class);
-                        machines.add(m);
-                    }
-                }
             }
 
             @Override
