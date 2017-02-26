@@ -27,13 +27,17 @@ import logical.RepairHistory;
 
 public class MachineMaintenanceActivity extends AppCompatActivity {
 
+    //MACHINE
     private Machine detailedMachine;
 
+    //VIEWS
     private TextView txtMachineName;
     private TextView txtMachineLocation;
     private TextView txtMachineType;
     private ListView listView;
     private FloatingActionButton fab;
+
+    //HANDLER
     private FirebaseHandler handler;
 
     @Override
@@ -97,6 +101,9 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Create Adapter for the Maintenance with special look & feel
+     */
     private class MaintenanceAdapter extends ArrayAdapter
     {
 

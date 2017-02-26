@@ -10,12 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import logical.Machine;
@@ -93,7 +88,7 @@ public class FirebaseHandler {
     public void saveMaintenance(RepairHistory histo){
         DatabaseReference refDatabase = FirebaseDatabase.getInstance().getReference();
         String keyID = refDatabase.child("Maintenance").push().getKey();
-        histo.setS_hID(keyID);
+        histo.setS_ID(keyID);
         refDatabase.child("Maintenance").child(keyID).setValue(histo);
     }
 
@@ -184,17 +179,38 @@ public class FirebaseHandler {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                machines.clear();
+                if (dataSnapshot.getKey().equals("Machine")) {
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String key = snap.getKey();
+                        Machine m = snap.getValue(Machine.class);
+                        machines.add(m);
+                    }
+                }
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                machines.clear();
+                if (dataSnapshot.getKey().equals("Machine")) {
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String key = snap.getKey();
+                        Machine m = snap.getValue(Machine.class);
+                        machines.add(m);
+                    }
+                }
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                machines.clear();
+                if (dataSnapshot.getKey().equals("Machine")) {
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        String key = snap.getKey();
+                        Machine m = snap.getValue(Machine.class);
+                        machines.add(m);
+                    }
+                }
             }
 
             @Override

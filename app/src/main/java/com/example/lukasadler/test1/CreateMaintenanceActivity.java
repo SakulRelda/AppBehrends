@@ -23,7 +23,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private ImageView imgViewMaintenance;
     private TextView txtRepairDate;
     private EditText txtRepairDesc;
-    private FloatingActionButton fab;
+    private Button fab;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabBarCode;
     private Button saveMaintenance;
@@ -35,6 +35,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_maintenance);
 
+        //CHECK THE GIVEN INTENT
         Intent intent = getIntent();
         if(intent!= null){
             machine = (Machine) intent.getSerializableExtra("Machine");
@@ -42,13 +43,10 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
             return;
         }
 
-
-
         //GET VIEWS
         imgViewMaintenance = (ImageView) findViewById(R.id.imageViewNewMaintenance);
         txtRepairDate = (TextView) findViewById(R.id.txtRepairDate);
         txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
-        fab = (FloatingActionButton) findViewById(R.id.fabAddMaintenance);
         fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
         fabBarCode = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMaintenance);
         saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
@@ -56,21 +54,31 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         //INIT FIREBASE HANDLER
         handler = FirebaseHandler.getInstance();
 
-/*        fab.setOnClickListener(new View.OnClickListener() {
+
+        //SNAPSHOT FROM THE MAINTENANCE
+        fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //OPEN CAMERA
+                //TODO: CREATE SNAPSHOT LOGIC
             }
-        });*/
+        });
 
+        //SNAPSHOT FROM THE BARCODE
+        fabBarCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: CREATE BARCODE LOGIC
+            }
+        });
+
+        //SAVE A NEW MAINTENANCE ENTRY
         saveMaintenance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RepairHistory histo = new RepairHistory();
-                histo.setD_repairDate(new Date());
-                histo.setS_author(machine.getI_uID()); //NEEDED
+                histo.setS_author(machine.getI_uID());
                 histo.setS_Description(txtRepairDesc.getText().toString());
-                histo.setS_machineID(machine.getI_ID());//NEEDED
+                histo.setS_machineID(machine.getI_ID());
                 handler.saveMaintenance(histo);
             }
         });

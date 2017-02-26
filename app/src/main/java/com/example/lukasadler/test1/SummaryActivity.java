@@ -53,6 +53,7 @@ public class SummaryActivity extends AppCompatActivity {
         final FirebaseHandler h = FirebaseHandler.getInstance();
         final FirebaseUser u = h.getFirebaseUser();
         Log.d("Summary","Done");
+
         ArrayList<Machine> m = h.readMachines();
         MachineAdapter machines = new MachineAdapter(this,m);
         ListView list = (ListView) findViewById(R.id.listen);
