@@ -25,7 +25,6 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private EditText txtRepairDesc;
     private Button fab;
     private FloatingActionButton fabCamera;
-    private FloatingActionButton fabBarCode;
     private Button saveMaintenance;
     private FirebaseHandler handler;
     private Machine machine;
@@ -48,7 +47,6 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         txtRepairDate = (TextView) findViewById(R.id.txtRepairDate);
         txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
         fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
-        fabBarCode = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMaintenance);
         saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
 
         //INIT FIREBASE HANDLER
@@ -63,13 +61,6 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
             }
         });
 
-        //SNAPSHOT FROM THE BARCODE
-        fabBarCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: CREATE BARCODE LOGIC
-            }
-        });
 
         //SAVE A NEW MAINTENANCE ENTRY
         saveMaintenance.setOnClickListener(new View.OnClickListener() {
