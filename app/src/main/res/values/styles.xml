@@ -8,6 +8,7 @@
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:autoCompleteTextViewStyle">@style/RobotoAutoCompleteTextViewStyle</item>
         <item name="android:editTextStyle">@style/RobotoEditTextStyle</item>
+        <item name="colorPrimary">@color/colorTeal</item>
     </style>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
@@ -45,4 +46,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--Floating label text style-->
+    <style name="HintText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <!--Input field style-->
+    <style name="FloatingEditText" parent="Theme.AppCompat.Light">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+    </style>
+
+    <style name="ButtonStyleTeal" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="colorButtonNormal">@color/colorTeal</item>
+    </style>
 </resources>
