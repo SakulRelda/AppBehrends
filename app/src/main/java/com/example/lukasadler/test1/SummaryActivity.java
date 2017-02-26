@@ -54,12 +54,12 @@ public class SummaryActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listen);
 
         //LIFETIME LISTENER FOR THE DATABASE
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
         FirebaseListAdapter<Machine> firebaseListAdapter = new FirebaseListAdapter<Machine>(
                 this,
                 Machine.class,
                 R.layout.list_item,
-                ref) {
+                databaseReference) {
             @Override
             protected void populateView(View v, final Machine model, int position) {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemTitle);
@@ -109,7 +109,7 @@ public class SummaryActivity extends AppCompatActivity {
                      Machine m = (Machine) item;
                      Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
                      intent.putExtra("Machine", m);
-                     startActivity(intent);
+                     startActivityForResult(intent,0);
                  }
             }
         });

@@ -19,6 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,11 +68,22 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         //SET VALUES FOR THE MACHINE VIEW
         setValues(detailedMachine);
 
-        //FIREBASE HANDLER
-        handler = FirebaseHandler.getInstance();
-        ArrayList<RepairHistory> repHisto = handler.readMaintenance(detailedMachine.getI_ID());
-        MaintenanceAdapter adapter = new MaintenanceAdapter(this, repHisto);
-        listView.setAdapter(adapter);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Maintenance");
+        FirebaseListAdapter<RepairHistory> firebaseListAdapter = new FirebaseListAdapter<RepairHistory>(
+                this,
+                RepairHistory.class,
+                R.layout.maintenance_list_item,
+                databaseReference) {
+            @Override
+            protected void populateView(View v, RepairHistory model, int position) {
+                if(detailedMachine.getI_ID().equals(model.getS_machineID())){
+                    TextView txtView = (TextView) v.findViewById(R.id.listItemMaintenanceTitle);
+                    txtView.setText(model.getD_repairDate().toString());
+                }
+
+            }
+        };
+        listView.setAdapter(firebaseListAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -101,41 +116,4 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         txtMachineType.setText(m.getS_Machinentyp());
     }
 
-
-    /**
-     * Create Adapter for the Maintenance with special look & feel
-     */
-    private class MaintenanceAdapter extends ArrayAdapter
-    {
-
-        private Context context;
-        private int resource;
-        public Activity activity;
-        private List list;
-        public MaintenanceAdapter(Context context, List list){
-
-            super(context,0);
-            this.list = list;
-            this.context = context;
-            this.resource = 0;
-        }
-
-        public MaintenanceAdapter(Context context, int resource) {
-            super(context, resource);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int pos, View convertView, final ViewGroup parent){
-            if(convertView==null){
-                convertView = getLayoutInflater().inflate(R.layout.maintenance_list_item, null);
-            }
-            TextView txtView = (TextView) convertView.findViewById(R.id.listItemMaintenanceTitle);
-            final RepairHistory m = (RepairHistory) getItem(pos);
-            txtView.setText(m.getD_repairDate().toString());
-            return convertView;
-        }
-
-
-    }
 }

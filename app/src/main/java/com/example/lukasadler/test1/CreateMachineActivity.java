@@ -1,6 +1,7 @@
 package com.example.lukasadler.test1;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -49,6 +50,11 @@ public class CreateMachineActivity extends AppCompatActivity {
         //CREATE HANDLER
         handler = FirebaseHandler.getInstance();
 
+        if(!hasCamera()){
+            fab_Camera.setEnabled(false);
+            fab_BarcodeScanner.setEnabled(false);
+        }
+
         //CAMERA SNAP
         fab_Camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +84,7 @@ public class CreateMachineActivity extends AppCompatActivity {
                 FirebaseUser user = handler.getFirebaseUser();
                 m.setI_uID(user.getUid());
                 handler.saveMachine(m);
+                finishActivity(0);
             }
         });
     }
@@ -100,7 +107,9 @@ public class CreateMachineActivity extends AppCompatActivity {
                 t.show();
             }
         }
+    }
 
-
+    private boolean hasCamera(){
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 }
