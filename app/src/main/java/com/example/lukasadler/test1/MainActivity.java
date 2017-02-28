@@ -1,25 +1,20 @@
 package com.example.lukasadler.test1;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import database.FirebaseHandler;
 
 /**
  * Start Activity with the Login Possibility

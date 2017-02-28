@@ -2,10 +2,11 @@ package com.example.lukasadler.test1;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,9 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
 
 import database.FirebaseHandler;
 import logical.Machine;
@@ -31,6 +41,7 @@ public class SummaryActivity extends AppCompatActivity {
     protected FloatingActionButton floatingButton;
     protected LinearLayout linearLayout;
     protected ListView list;
+    protected FirebaseHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +55,22 @@ public class SummaryActivity extends AppCompatActivity {
         linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
         list = (ListView) findViewById(R.id.listen);
 
+        handler = FirebaseHandler.getInstance();
+        FirebaseUser user = handler.getFirebaseUser();
+
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
+        Query queryRef = databaseReference.orderByChild("i_uID").equalTo(user.getUid());
         FirebaseListAdapter<Machine> firebaseListAdapter = new FirebaseListAdapter<Machine>(
                 this,
                 Machine.class,
                 R.layout.list_item,
-                databaseReference) {
+                queryRef) {
             @Override
             protected void populateView(View v, final Machine model, int position) {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemTitle);
                 txtView.setText(model.getS_Name());
+                final ImageView imgPic = (ImageView) v.findViewById(R.id.imageViewItems);
                 ImageView imgViewEdit = (ImageView) v.findViewById(R.id.listItemEdit);
                 ImageView imgViewDelete = (ImageView) v.findViewById(R.id.listItemDelete);
 
@@ -89,19 +105,53 @@ public class SummaryActivity extends AppCompatActivity {
                         dia.show();
                     }
                 });
+
+                try {
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                    StorageReference picRef = storageReference.child("MachinePhotos/" + model.getI_ID());
+                    final long byteVal = 1024 * 1024;
+                    final byte[][] vals = new byte[1][];
+                    picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            try {
+                                File t = new File(SummaryActivity.this.getFilesDir() + "/temp.jpg");
+                                if (t.exists()) {
+                                    t.delete();
+                                }
+
+                                File test = new File(SummaryActivity.this.getFilesDir(), "temp.jpg");
+                                FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                                st.write(bytes);
+                                Picasso.with(SummaryActivity.this).load(test).into(imgPic);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("HERE");
+                        }
+                    });
+                } catch (Exception ex) {
+                }
+                ;
+
             }
         };
+
         list.setAdapter(firebaseListAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object item = parent.getItemAtPosition(position);
-                 if(item instanceof Machine) {
-                     Machine m = (Machine) item;
-                     Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
-                     intent.putExtra("Machine", m);
-                     startActivity(intent);
-                 }
+                if (item instanceof Machine) {
+                    Machine m = (Machine) item;
+                    Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
+                    intent.putExtra("Machine", m);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -110,7 +160,7 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
 
             }
         });
@@ -118,8 +168,8 @@ public class SummaryActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 0){
-            Toast t = Toast.makeText(this, "Maschine erstellt",Toast.LENGTH_SHORT);
+        if (requestCode == 0) {
+            Toast t = Toast.makeText(this, "Maschine erstellt", Toast.LENGTH_SHORT);
             t.show();
         }
     }
@@ -148,4 +198,6 @@ public class SummaryActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

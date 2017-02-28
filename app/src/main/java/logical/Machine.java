@@ -3,7 +3,6 @@ package logical;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by LukasAdler on 08.02.17.
