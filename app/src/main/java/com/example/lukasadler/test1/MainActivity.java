@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
+        if(mFirebaseAuth.getCurrentUser()!=null){
+            finish();
+            startActivity(new Intent(this, SummaryActivity.class));
+        }
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override

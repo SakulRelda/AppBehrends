@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -20,15 +23,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.FirebaseHandler;
 import logical.Machine;
 import logical.RepairHistory;
+import styleviews.MaintenanceAdapter;
 
 public class MachineMaintenanceActivity extends AppCompatActivity {
 
@@ -40,6 +55,7 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
     private TextView txtMachineLocation;
     private TextView txtMachineType;
     private ListView listView;
+    private ImageView imgOverview;
     private FloatingActionButton fab;
 
     //HANDLER
@@ -63,6 +79,7 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         txtMachineName = (TextView) findViewById(R.id.lblMachineName);
         txtMachineType = (TextView) findViewById(R.id.lblMachineTyp);
         listView = (ListView) findViewById(R.id.listMaintenance);
+        imgOverview = (ImageView) findViewById(R.id.imgViewOverview);
         fab = (FloatingActionButton) findViewById(R.id.fabAddMaintenance);
 
         //SET VALUES FOR THE MACHINE VIEW
@@ -114,6 +131,41 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
         txtMachineName.setText(m.getS_Name());
         txtMachineLocation.setText(m.getS_MachineLocation());
         txtMachineType.setText(m.getS_Machinentyp());
+        downloadImage(m);
+    }
+
+    public void downloadImage(Machine m){
+        try{
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference picRef = storageReference.child("MachinePhotos/"+m.getI_ID());
+            final long byteVal = 1024 * 1024;
+            final byte[][] vals = new byte[1][];
+            picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    try {
+                        File t = new File(MachineMaintenanceActivity.this.getFilesDir()+"/temp.jpg");
+                        if(t.exists()){
+                            t.delete();
+                        }
+
+                        File test = new File(MachineMaintenanceActivity.this.getFilesDir(), "temp.jpg");
+                        FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                        st.write(bytes);
+                        Picasso.with(MachineMaintenanceActivity.this).load(test).into(imgOverview);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("HERE");
+                }
+            });
+        }catch(Exception ex){};
+
+
     }
 
 }

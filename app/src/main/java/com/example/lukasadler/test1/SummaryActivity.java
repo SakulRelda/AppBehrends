@@ -1,23 +1,17 @@
 package com.example.lukasadler.test1;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,12 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import database.FirebaseHandler;
 import logical.Machine;
@@ -109,7 +100,7 @@ public class SummaryActivity extends AppCompatActivity {
                      Machine m = (Machine) item;
                      Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
                      intent.putExtra("Machine", m);
-                     startActivityForResult(intent,0);
+                     startActivity(intent);
                  }
             }
         });
