@@ -36,11 +36,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal">
-        <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:visibility="gone" />
-        <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -51,6 +46,7 @@
                         android:layout_height="wrap_content" android:hint="@string/email_hint"
                         android:inputType="textEmailAddress" android:maxLines="1"
                         android:singleLine="true"
+                        android:gravity="center_horizontal"
                         android:layout_marginBottom="10dp"
                         android:textColorHint="@color/colorTeal"
                         android:textColor="@color/colorTeal" />
@@ -59,21 +55,27 @@
                         android:layout_height="wrap_content" android:hint="@string/password_hint"
                         android:imeActionLabel="@string/sign_up_text"
                         android:imeOptions="actionUnspecified" android:inputType="textPassword"
-                        android:maxLines="1" android:singleLine="true"
+                        android:maxLines="1"
+                        android:gravity="center_horizontal"
+                        android:singleLine="true"
                         android:layout_marginBottom="10dp"
                         android:textColorHint="@color/colorTeal"
                         android:textColor="@color/colorTeal" />
 
-                    <Button android:id="@+id/signupButton" style="?android:textAppearanceSmall"
-                        android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp" android:text="@string/sign_up_text"
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/signupButton"
+                        style="@style/ButtonStyleTeal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/sign_up_text"
                         android:textStyle="bold"
                         android:textColor="#ffffffff"
-                        android:background="@color/colorTeal" />
+                        android:theme="@style/ButtonStyleTeal"
+                        android:background="@color/colorTeal"/>
 
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
     <LinearLayout
@@ -81,14 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:orientation="horizontal"
         android:gravity="bottom|center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/signUpTextView"
-            android:autoLink="web"
-            android:textColor="@color/colorTeal" />
     </LinearLayout>
 
 </LinearLayout>

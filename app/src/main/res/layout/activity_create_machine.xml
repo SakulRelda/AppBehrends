@@ -2,7 +2,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,29 +35,36 @@
             android:background="@color/accent"
             android:orientation="vertical">
 
+<!--            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintAnimationEnabled="true"
+                app:hintTextAppearance="@color/colorTeal"
+                app:hintEnabled="true">-->
             <EditText
                 android:id="@+id/machineName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
-                android:hint="Maschinenname"
-                android:background="@null"
+                android:hint="Maschinenname eingeben"
+                android:backgroundTint="@color/colorTeal"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"
                 android:textColorHint="@color/colorTeal"/>
+<!--            </android.support.design.widget.TextInputLayout>-->
 
             <EditText
                 android:id="@+id/machineTyp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
-                android:hint="Maschinentyp"
-                android:background="@null"
+                android:hint="Maschinentyp eingeben"
+                android:backgroundTint="@color/colorTeal"
                 android:drawableStart="@drawable/ic_type"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"
@@ -65,26 +74,25 @@
                 android:id="@+id/machineLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
-                android:hint="Maschinenstandort"
-                android:background="@null"
+                android:hint="Maschinenstandort eingeben"
+                android:backgroundTint="@color/colorTeal"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"
                 android:textColorHint="@color/colorTeal"
                 />
 
-
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnCreateMachine"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
+                android:theme="@style/ButtonStyleTeal"
                 android:textColor="@color/accent"
-                android:background="@color/colorTeal"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/speichern_text"/>
 
