@@ -19,7 +19,6 @@ import logical.RepairHistory;
 /**
  * Created by LukasAdler on 10.02.17.
  */
-
 public class FirebaseHandler {
 
     private static FirebaseHandler instance = new FirebaseHandler();
@@ -66,6 +65,14 @@ public class FirebaseHandler {
      */
     public FirebaseUser getFirebaseUser(){
         return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    public boolean checkLoggedIn(){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser().isAnonymous()||firebaseAuth.getCurrentUser()==null) {
+            return false;
+        }
+        return true;
     }
 
     /**

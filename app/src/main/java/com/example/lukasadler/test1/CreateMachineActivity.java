@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,6 @@ public class CreateMachineActivity extends AppCompatActivity {
     private EditText s_machineType;
     private EditText s_machineLocation;
     private ImageView img_Machine;
-    //private ProgressDialog progressBar;
     private Button btn_Save;
     private FloatingActionButton fab_Camera;
     private FloatingActionButton fab_BarcodeScanner;
@@ -47,6 +47,15 @@ public class CreateMachineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_machine);
 
+        //CREATE HANDLER
+        handler = FirebaseHandler.getInstance();
+        if(handler.checkLoggedIn()==false){
+            finish();
+            Intent intent = new Intent(CreateMachineActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+
+
         //GET VIEWS
         s_machineLocation = (EditText) findViewById(R.id.machineLocation);
         s_machineName = (EditText) findViewById(R.id.machineName);
@@ -55,10 +64,8 @@ public class CreateMachineActivity extends AppCompatActivity {
         fab_BarcodeScanner = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMachine);
         fab_Camera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMachine);
         img_Machine = (ImageView) findViewById(R.id.imageViewNewMachine);
-        //progressBar = new ProgressDialog(this);
 
-        //CREATE HANDLER
-        handler = FirebaseHandler.getInstance();
+
 
         //CREATE STORAGE OBJECT
         mStorage = FirebaseStorage.getInstance().getReference();
@@ -96,9 +103,9 @@ public class CreateMachineActivity extends AppCompatActivity {
 
     /**
      * Method which is called after a Result
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode - reqCode
+     * @param resultCode - resCode
+     * @param data - Intent Data
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -149,7 +156,9 @@ public class CreateMachineActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {}
                 });
             }
-        }catch(Exception ex){};
+        }catch(Exception ex){
+            Log.d("UPLOAD ERROR", ex.toString());
+        };
     }
 
     /**

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -106,37 +107,7 @@ public class SummaryActivity extends AppCompatActivity {
                     }
                 });
 
-                try {
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                    StorageReference picRef = storageReference.child("MachinePhotos/" + model.getI_ID());
-                    final long byteVal = 1024 * 1024;
-                    final byte[][] vals = new byte[1][];
-                    picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            try {
-                                File t = new File(SummaryActivity.this.getFilesDir() + "/temp.jpg");
-                                if (t.exists()) {
-                                    t.delete();
-                                }
-
-                                File test = new File(SummaryActivity.this.getFilesDir(), "temp.jpg");
-                                FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
-                                st.write(bytes);
-                                Picasso.with(SummaryActivity.this).load(test).into(imgPic);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            System.out.println("HERE");
-                        }
-                    });
-                } catch (Exception ex) {
-                }
-                ;
+                downloadImage(model, imgPic);
 
             }
         };
@@ -159,8 +130,8 @@ public class SummaryActivity extends AppCompatActivity {
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
-                startActivityForResult(intent, 0);
+                Intent createMachineIntent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
+                startActivityForResult(createMachineIntent, 0);
 
             }
         });
@@ -197,6 +168,40 @@ public class SummaryActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void downloadImage(Machine model, final ImageView imgPic){
+        try {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference picRef = storageReference.child("MachinePhotos/" + model.getI_ID());
+            final long byteVal = 1024 * 1024;
+            final byte[][] vals = new byte[1][];
+            picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    try {
+                        File t = new File(SummaryActivity.this.getFilesDir() + "/temp.jpg");
+                        if (t.exists()) {
+                            t.delete();
+                        }
+
+                        File test = new File(SummaryActivity.this.getFilesDir(), "temp.jpg");
+                        FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                        st.write(bytes);
+                        Picasso.with(SummaryActivity.this).load(test).into(imgPic);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("HERE");
+                }
+            });
+        } catch (Exception ex) {
+            Log.d("Download ERROR", ex.toString());
+        };
     }
 
 

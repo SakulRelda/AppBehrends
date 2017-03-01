@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -145,7 +146,9 @@ public class MachineMaintenanceActivity extends AppCompatActivity {
                     System.out.println("HERE");
                 }
             });
-        }catch(Exception ex){};
+        }catch(Exception ex){
+            Log.d("DOWNLOAD ERROR", ex.toString());
+        };
 
 
     }

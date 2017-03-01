@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -126,7 +127,9 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {}
                 });
             }
-        }catch(Exception ex){};
+        }catch(Exception ex){
+            Log.d("UPLOAD ERROR", ex.toString());
+        };
     }
 
     /**
