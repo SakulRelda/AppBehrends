@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lukasadler.test1">
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +17,14 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SummaryActivity" />
-        <activity android:name=".CreateMachineActivity" android:label="Neue Maschine" />
+        <activity
+            android:name=".CreateMachineActivity"
+            android:label="Neue Maschine" />
         <activity android:name=".MachineMaintenanceActivity" />
-        <activity android:name=".CreateMaintenanceActivity" android:label="Neuer Wartungseintrag"/>
+        <activity
+            android:name=".CreateMaintenanceActivity"
+            android:label="Neuer Wartungseintrag" />
+        <activity android:name=".TabActivity"></activity>
     </application>
 
 </manifest>
