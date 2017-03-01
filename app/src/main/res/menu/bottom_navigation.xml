@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/fragment_overview"
+		android:icon="@drawable/ic_overview_black"
+		android:title="Übersicht"/>
+	<item
+		android:id="@+id/fragment_main"
+		android:icon="@drawable/ic_main_black"
+		android:title="Wartungen"/>
+</menu>
