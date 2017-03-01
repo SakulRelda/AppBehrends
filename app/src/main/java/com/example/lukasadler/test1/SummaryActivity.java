@@ -98,8 +98,7 @@ public class SummaryActivity extends AppCompatActivity {
                 Object item = parent.getItemAtPosition(position);
                  if(item instanceof Machine) {
                      Machine m = (Machine) item;
-                     //CHANGE CORRECT?
-                     Intent intent = new Intent(getApplicationContext(), TabActivity.class);
+                     Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
                      intent.putExtra("Machine", m);
                      startActivity(intent);
                  }
