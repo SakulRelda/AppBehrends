@@ -3,6 +3,7 @@ package com.example.lukasadler.test1;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,14 +11,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import logical.Machine;
+
+/**
+ * @author Nico Wickersheim
+ */
 public class TabActivity extends AppCompatActivity {
+
+    private Machine detailedMachine;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 setContentView(R.layout.activity_tab);
+        setContentView(R.layout.activity_tab);
+        setupNavigationView();
 
-			setupNavigationView();
+        Intent intent = getIntent();
+        if(intent!=null){
+            detailedMachine = (Machine) intent.getSerializableExtra("Machine");
+        }else{
+            return;
+        }
+
 	}
 
 	private void setupNavigationView() {
@@ -47,7 +62,7 @@ public class TabActivity extends AppCompatActivity {
 		switch (item.getItemId()) {
 			case R.id.fragment_overview:
 				// Action to perform when Home Menu item is selected.
-				pushFragment(new OverviewFragment());
+				pushFragment(OverviewFragment.newInstance(detailedMachine));
 				break;
 			case R.id.fragment_main:
 				// Action to perform when Bag Menu item is selected.
@@ -56,6 +71,8 @@ public class TabActivity extends AppCompatActivity {
 		}
 	}
 
+
+
 	protected void pushFragment(Fragment fragment) {
 		if (fragment == null)
 			return;
@@ -63,7 +80,6 @@ public class TabActivity extends AppCompatActivity {
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction ft = fragmentManager.beginTransaction();
 		ft.replace(R.id.frameLayout, fragment);
-		ft.addToBackStack(null);
 		ft.commit();
 
 

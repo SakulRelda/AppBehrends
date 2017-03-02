@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -118,7 +119,8 @@ public class SummaryActivity extends AppCompatActivity {
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Machine) {
                     Machine m = (Machine) item;
-                    Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
+                    //Intent intent = new Intent(getApplicationContext(), MachineMaintenanceActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), TabActivity.class);
                     intent.putExtra("Machine", m);
                     startActivity(intent);
                 }
