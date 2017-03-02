@@ -5,4 +5,5 @@ Things to do:
 - Maschine anlegen - ohne Eingabe zurück - Toast erscheint trotzdem
 - Spinner (Dropdown) für Maschinentyp?
 - maxLength für Maschinenname @done
--
+- Automatischer Login bei Anlegen eines neuen Users
+- Login nicht auf jede Activiry geprüft

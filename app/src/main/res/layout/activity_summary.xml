@@ -5,28 +5,20 @@
     android:layout_height="match_parent"
     android:id="@+id/anchors">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearMachineLayout"
+        android:orientation="vertical">
 
+        <ListView
+            android:id="@+id/listen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorTeal"
+            android:dividerHeight="4px" />
 
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/linearMachineLayout"
-                    android:orientation="vertical">
-                    //ContentStuff
-                    <ListView
-                        android:id="@+id/listen"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="@color/colorTeal"
-                        android:dividerHeight="4px"></ListView>
-                </LinearLayout>
-
-
-
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -34,10 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:background="@color/colorTeal"
         android:tint="@android:color/white"
         app:layout_anchor="@id/linearMachineLayout"
         app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.design.widget.CoordinatorLayout>

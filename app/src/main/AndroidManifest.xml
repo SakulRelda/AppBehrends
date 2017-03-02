@@ -24,7 +24,8 @@
         <activity
             android:name=".CreateMaintenanceActivity"
             android:label="Neuer Wartungseintrag" />
-        <activity android:name=".TabActivity"></activity>
+        <activity android:name=".TabActivity" />
+        <activity android:name=".MaintenanceActivity" android:label="Wartungen"></activity>
     </application>
 
 </manifest>

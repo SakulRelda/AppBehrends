@@ -46,6 +46,12 @@
                 android:textColor="@color/colorTeal"
                 android:text="Datumswert"/>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorTeal"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
             <EditText
                 android:id="@+id/txtRepairDescription"
                 android:layout_width="match_parent"
@@ -54,21 +60,18 @@
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
                 android:hint="Beschreibung eingeben"
-                android:backgroundTint="@color/colorTeal"
                 android:drawableStart="@drawable/ic_description"
                 android:drawablePadding="8dp"
-                android:textColor="@color/colorTeal"
-                android:textColorHint="@color/colorTeal"/>
-
+                android:theme="@style/EditTextStyle"/>
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btnCreateMaintenance"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:textStyle="bold"
-                android:textColor="@color/accent"
-                android:background="@color/colorTeal"
+                android:theme="@style/ButtonStyleTeal"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/speichern_text"/>
 
