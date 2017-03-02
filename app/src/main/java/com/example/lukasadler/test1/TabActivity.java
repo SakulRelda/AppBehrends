@@ -24,15 +24,17 @@ public class TabActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
-        setupNavigationView();
+        readIntentValue();
+		setupNavigationView();
+	}
 
-        Intent intent = getIntent();
-        if(intent!=null){
-            detailedMachine = (Machine) intent.getSerializableExtra("Machine");
-        }else{
-            return;
-        }
-
+	private void readIntentValue(){
+		Intent intent = getIntent();
+		if(intent!=null){
+			detailedMachine = (Machine) intent.getSerializableExtra("Machine");
+		}else{
+			return;
+		}
 	}
 
 	private void setupNavigationView() {
@@ -58,15 +60,18 @@ public class TabActivity extends AppCompatActivity {
 	protected void selectFragment(MenuItem item) {
 
 		item.setChecked(true);
-
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("Machine",detailedMachine);
 		switch (item.getItemId()) {
 			case R.id.fragment_overview:
-				// Action to perform when Home Menu item is selected.
-				pushFragment(OverviewFragment.newInstance(detailedMachine));
+				OverviewFragment overviewFragment = new OverviewFragment();
+				overviewFragment.setArguments(bundle);
+				pushFragment(overviewFragment);
 				break;
 			case R.id.fragment_main:
-				// Action to perform when Bag Menu item is selected.
-				pushFragment(new MainFragment());
+				MaintenanceFragment mainFragment = new MaintenanceFragment();
+				mainFragment.setArguments(bundle);
+				pushFragment(mainFragment);
 				break;
 		}
 	}
