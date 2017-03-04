@@ -140,9 +140,20 @@ public class SummaryActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
-            Toast t = Toast.makeText(this, "Maschine erstellt", Toast.LENGTH_SHORT);
-            t.show();
+        Toast t;
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode)
+        {
+            case RESULT_OK:
+                t = Toast.makeText(this, R.string.machineCreated, Toast.LENGTH_SHORT);
+                t.show();
+                break;
+            case RESULT_CANCELED:
+                t = Toast.makeText(this, R.string.machineAborted, Toast.LENGTH_SHORT);
+                t.show();
+                break;
+            default:
+                break;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -35,6 +36,7 @@ public class CreateMachineActivity extends AppCompatActivity {
     private EditText s_machineLocation;
     private ImageView img_Machine;
     private Button btn_Save;
+    private Button btn_Abort;
     private FloatingActionButton fab_Camera;
     private FloatingActionButton fab_BarcodeScanner;
     private final int REQUEST_IMAGE_CAPTURE = 1;
@@ -61,10 +63,10 @@ public class CreateMachineActivity extends AppCompatActivity {
         s_machineName = (EditText) findViewById(R.id.machineName);
         s_machineType = (EditText) findViewById(R.id.machineTyp);
         btn_Save = (Button) findViewById(R.id.btnCreateMachine);
+        btn_Abort = (Button) findViewById(R.id.btnAbortCreate);
         fab_BarcodeScanner = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMachine);
         fab_Camera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMachine);
         img_Machine = (ImageView) findViewById(R.id.imageViewNewMachine);
-
 
 
         //CREATE STORAGE OBJECT
@@ -97,6 +99,14 @@ public class CreateMachineActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveMachineToDatabase();
+            }
+        });
+
+        //ABORT PROCESS
+        btn_Abort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abortCreateMachine();
             }
         });
     }
@@ -188,8 +198,17 @@ public class CreateMachineActivity extends AppCompatActivity {
         machine.setI_uID(user.getUid());
         handler.saveMachine(machine);
         uploadImage(machine.getI_ID());
-        finishActivity(0);
-        onBackPressed();
+        setResult(Activity.RESULT_OK);
+        finish();
+
+    }
+
+    /**
+     * Abort create Machine Process
+     */
+    private void abortCreateMachine(){
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 
 }
