@@ -194,11 +194,17 @@ public class CreateMachineActivity extends AppCompatActivity {
         machine.setS_Machinentyp(s_machineType.getText().toString());
         machine.setS_Name(s_machineName.getText().toString());
         machine.setS_MachineLocation(s_machineLocation.getText().toString());
-        FirebaseUser user = handler.getFirebaseUser();
-        machine.setI_uID(user.getUid());
-        handler.saveMachine(machine);
-        uploadImage(machine.getI_ID());
-        setResult(Activity.RESULT_OK);
+        if(!machine.getS_Machinentyp().isEmpty() && !machine.getS_Name().isEmpty() && !machine.getS_MachineLocation().isEmpty()) {
+            FirebaseUser user = handler.getFirebaseUser();
+            machine.setI_uID(user.getUid());
+            handler.saveMachine(machine);
+            uploadImage(machine.getI_ID());
+            setResult(Activity.RESULT_OK);
+        }else {
+            Intent intent = new Intent(this, getClass());
+            intent.putExtra("result",R.string.machineAbortedNoData);
+            setResult(Activity.RESULT_CANCELED,intent);
+        }
         finish();
 
     }

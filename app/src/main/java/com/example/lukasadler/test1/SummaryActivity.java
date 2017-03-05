@@ -78,7 +78,7 @@ public class SummaryActivity extends AppCompatActivity {
                 imgViewEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //EDIT LOGIC
+                        //TODO: EDIT LOGIC
                     }
                 });
 
@@ -149,7 +149,11 @@ public class SummaryActivity extends AppCompatActivity {
                 t.show();
                 break;
             case RESULT_CANCELED:
-                t = Toast.makeText(this, R.string.machineAborted, Toast.LENGTH_SHORT);
+                int toastText = R.string.machineAborted;
+                if(data != null) {
+                    toastText = data.getIntExtra("result", R.string.machineAborted);
+                }
+                t = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
                 t.show();
                 break;
             default:
