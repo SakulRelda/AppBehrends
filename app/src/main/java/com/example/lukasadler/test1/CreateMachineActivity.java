@@ -54,18 +54,8 @@ public class CreateMachineActivity extends AppCompatActivity {
             Intent intent = new Intent(CreateMachineActivity.this, MainActivity.class);
             startActivity(intent);
         }
-
-
-        //GET VIEWS
-        s_machineLocation = (EditText) findViewById(R.id.machineLocation);
-        s_machineName = (EditText) findViewById(R.id.machineName);
-        s_machineType = (EditText) findViewById(R.id.machineTyp);
-        btn_Save = (Button) findViewById(R.id.btnCreateMachine);
-        fab_BarcodeScanner = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMachine);
-        fab_Camera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMachine);
-        img_Machine = (ImageView) findViewById(R.id.imageViewNewMachine);
-
-
+        
+        accessFields();
 
         //CREATE STORAGE OBJECT
         mStorage = FirebaseStorage.getInstance().getReference();
@@ -99,6 +89,21 @@ public class CreateMachineActivity extends AppCompatActivity {
                 saveMachineToDatabase();
             }
         });
+    }
+
+
+    /**
+     * Access the View Fields
+     */
+    private void accessFields(){
+        //GET VIEWS
+        s_machineLocation = (EditText) findViewById(R.id.machineLocation);
+        s_machineName = (EditText) findViewById(R.id.machineName);
+        s_machineType = (EditText) findViewById(R.id.machineTyp);
+        btn_Save = (Button) findViewById(R.id.btnCreateMachine);
+        fab_BarcodeScanner = (FloatingActionButton) findViewById(R.id.fabBarcodeScannerMachine);
+        fab_Camera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMachine);
+        img_Machine = (ImageView) findViewById(R.id.imageViewNewMachine);
     }
 
     /**

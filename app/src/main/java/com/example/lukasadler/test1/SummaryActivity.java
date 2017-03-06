@@ -49,6 +49,10 @@ public class SummaryActivity extends AppCompatActivity {
     protected ProgressDialog progressBar;
     protected FirebaseUser user;
 
+    /**
+     * Lifecycle Method for the Activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +143,9 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Implements a Timer for the Exception that no Machines are available
+     */
     private void addTimer(){
         new Timer().schedule(new TimerTask() {
             @Override
@@ -148,6 +155,9 @@ public class SummaryActivity extends AppCompatActivity {
         },5000);
     }
 
+    /**
+     * Access the View Fields
+     */
     private void accessFields(){
         //GET VIEWS
         floatingButton = (FloatingActionButton) findViewById(R.id.fab);
@@ -164,6 +174,13 @@ public class SummaryActivity extends AppCompatActivity {
         progressBar.show();
     }
 
+    /**
+     * Lifecycle of the Activity
+     * --> If the Activity gets a Result
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Toast t;
@@ -187,6 +204,11 @@ public class SummaryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Menu Create Event
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -194,6 +216,11 @@ public class SummaryActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Item Selected Events for the Menu
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -212,6 +239,11 @@ public class SummaryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Downloads a Image for the Machine if it exists
+     * @param model
+     * @param imgPic
+     */
     private void downloadImage(Machine model, final ImageView imgPic){
         try {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();

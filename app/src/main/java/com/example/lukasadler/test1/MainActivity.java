@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected ProgressDialog progressBar;
     private FirebaseAuth mFirebaseAuth;
 
-
     /**
      * Activity Lifecycle
      * @param savedInstanceState
@@ -153,9 +152,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SummaryActivity.class));
         }
     }
-
-
-
 
 }
 

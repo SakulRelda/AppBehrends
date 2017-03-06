@@ -27,7 +27,6 @@ import logical.RepairHistory;
 
 public class CreateMaintenanceActivity extends AppCompatActivity {
 
-
     private ImageView imgViewMaintenance;
     private TextView txtRepairDate;
     private EditText txtRepairDesc;
@@ -57,12 +56,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
             return;
         }
 
-        //GET VIEWS
-        imgViewMaintenance = (ImageView) findViewById(R.id.imageViewNewMaintenance);
-        txtRepairDate = (TextView) findViewById(R.id.txtRepairDate);
-        txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
-        fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
-        saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
+        accessFields();
 
         //INIT FIREBASE HANDLER
         handler = FirebaseHandler.getInstance();
@@ -107,6 +101,18 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
             imgViewMaintenance.setImageBitmap(imageBit);
             image = imageBit.createScaledBitmap(imageBit, 20, 20, true);
         }
+    }
+
+    /**
+     * Access the View Fields
+     */
+    private void accessFields(){
+        //GET VIEWS
+        imgViewMaintenance = (ImageView) findViewById(R.id.imageViewNewMaintenance);
+        txtRepairDate = (TextView) findViewById(R.id.txtRepairDate);
+        txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
+        fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
+        saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
     }
 
     /**
