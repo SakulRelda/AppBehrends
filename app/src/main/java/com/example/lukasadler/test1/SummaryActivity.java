@@ -145,7 +145,7 @@ public class SummaryActivity extends AppCompatActivity {
             public void run() {
                 progressBar.dismiss();
             }
-        },100);
+        },5000);
     }
 
     private void accessFields(){

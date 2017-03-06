@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         emailEditText.setText("sakulrelda@aol.com");
         passwordEditText.setText("71292al");
 
+        progressBar = new ProgressDialog(this);
+        progressBar.setTitle("Authentication");
+        progressBar.setMessage("Login...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -65,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar = new ProgressDialog(v.getContext());
-                progressBar.setMessage("Login...");
-                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
                 progressBar.show();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
