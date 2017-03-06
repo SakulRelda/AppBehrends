@@ -40,7 +40,7 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:text="Maschinenname"
+                android:text="@string/machinename"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"/>
@@ -52,7 +52,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
-                android:text="Maschinentyp"
+                android:text="@string/machinetype"
                 android:textSize="20dp"
                 android:drawableStart="@drawable/ic_type"
                 android:drawablePadding="8dp"
@@ -65,13 +65,12 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
-                android:text="Maschinenstandort"
+                android:text="@string/machinelocation"
                 android:textSize="20dp"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal" />
         </LinearLayout>
-
 
     </LinearLayout>
 

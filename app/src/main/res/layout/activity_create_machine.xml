@@ -27,7 +27,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,7 +47,7 @@
                 android:maxLength="15"
                 android:layout_marginLeft="10dp"
                 android:imeOptions="actionNext"
-                android:hint="Maschinenname eingeben"
+                android:hint="@string/type_machine_name"
                 android:theme="@style/EditTextStyle"
                 android:drawableStart="@drawable/ic_name"
                 android:drawablePadding="8dp" />
@@ -66,7 +65,7 @@
                 android:layout_marginLeft="10dp"
                 android:maxLength="30"
                 android:imeOptions="actionNext"
-                android:hint="Maschinentyp eingeben"
+                android:hint="@string/type_machine_type"
                 android:drawableStart="@drawable/ic_type"
                 android:drawablePadding="8dp"
                 android:theme="@style/EditTextStyle"/>
@@ -84,7 +83,7 @@
                 android:layout_marginLeft="10dp"
                 android:maxLength="30"
                 android:imeOptions="actionGo"
-                android:hint="Maschinenstandort eingeben"
+                android:hint="@string/type_machine_location"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="8dp"
                 android:theme="@style/EditTextStyle" />
@@ -103,7 +102,7 @@
                     android:textStyle="bold"
                     android:theme="@style/ButtonStyleTeal"
                     android:layout_gravity="center"
-                    android:text="@string/speichern_text" />
+                    android:text="@string/save" />
             </LinearLayout>
 
         </LinearLayout>
