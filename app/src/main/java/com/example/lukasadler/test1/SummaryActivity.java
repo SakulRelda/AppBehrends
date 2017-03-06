@@ -251,15 +251,12 @@ public class SummaryActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(byte[] bytes) {
                     try {
-                        File t = new File(SummaryActivity.this.getFilesDir() + "/temp.jpg");
-                        if (t.exists()) {
-                            t.delete();
-                        }
+                        File outputDir = SummaryActivity.this.getCacheDir();
+                        File outputFile = File.createTempFile("temp.jpg",null,outputDir);
 
-                        File test = new File(SummaryActivity.this.getFilesDir(), "temp.jpg");
-                        FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                        FileOutputStream st = new FileOutputStream(outputFile.getAbsolutePath());
                         st.write(bytes);
-                        Picasso.with(SummaryActivity.this).load(test).into(imgPic);
+                        Picasso.with(SummaryActivity.this).load(outputFile).into(imgPic);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

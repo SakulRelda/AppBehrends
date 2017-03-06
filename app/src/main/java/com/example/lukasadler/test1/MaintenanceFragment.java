@@ -2,19 +2,30 @@ package com.example.lukasadler.test1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import logical.Machine;
 import logical.RepairHistory;
@@ -75,6 +86,8 @@ public class MaintenanceFragment extends android.app.Fragment {
                 android.text.format.DateFormat df = new android.text.format.DateFormat();
                 txtView.setText("Wartung: "+df.format("dd-MM-yyyy",model.getD_repairDate()));
 
+                ImageView imgView = (ImageView) v.findViewById(R.id.imageViewMaintenance);
+                downloadImage(model,imgView);
             }
         };
         listView.setAdapter(firebaseListAdapter);
@@ -90,5 +103,41 @@ public class MaintenanceFragment extends android.app.Fragment {
                 }
             }
         });
+    }
+
+    /**
+     * Downloads a Image for the Machine if it exists
+     * @param model
+     * @param imgPic
+     */
+    private void downloadImage(RepairHistory model, final ImageView imgPic){
+        try {
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference picRef = storageReference.child("MachinePhotos/" + model.getS_ID());
+            final long byteVal = 1024 * 1024;
+            final byte[][] vals = new byte[1][];
+            picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    try {
+                        File outputDir = getContext().getCacheDir();
+                        File outputFile = File.createTempFile("temp.jpg",null,outputDir);
+
+                        FileOutputStream st = new FileOutputStream(outputFile.getAbsolutePath());
+                        st.write(bytes);
+                        Picasso.with(getActivity().getApplicationContext()).load(outputFile).into(imgPic);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("HERE");
+                }
+            });
+        } catch (Exception ex) {
+            Log.d("Download ERROR", ex.toString());
+        };
     }
 }
