@@ -1,9 +1,0 @@
-
-Things to do:
-
-- Maschine lässt sich noch ohne Eingabe speichern - darf nicht möglich sein
-- Maschine anlegen - ohne Eingabe zurück - Toast erscheint trotzdem
-- Spinner (Dropdown) für Maschinentyp?
-- maxLength für Maschinenname @done
-- Automatischer Login bei Anlegen eines neuen Users
-- Login nicht auf jede Activiry geprüft

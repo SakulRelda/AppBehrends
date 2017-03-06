@@ -117,7 +117,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         //TRY TO UPLOAD IMAGE
         try{
             if(image!=null){
-                StorageReference ref = mStorage.child("MachinePhotos").child(id);
+                StorageReference ref = mStorage.child("MaintenancePhotos").child(id);
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.JPEG,100,out);
                 byte[] data = out.toByteArray();

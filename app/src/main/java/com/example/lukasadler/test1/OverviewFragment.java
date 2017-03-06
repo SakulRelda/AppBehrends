@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,13 +21,11 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import database.FirebaseHandler;
 import logical.Machine;
 
 /**
  * Created by Wickersheim on 28.02.2017.
  */
-
 public class OverviewFragment extends android.app.Fragment {
 
     //MACHINE
@@ -39,10 +38,13 @@ public class OverviewFragment extends android.app.Fragment {
     private ImageView imgOverview;
     private FloatingActionButton fab;
 
-    //HANDLER
-    private FirebaseHandler handler;
-
-
+    /**
+     * Lifecycle of the Fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,54 +56,72 @@ public class OverviewFragment extends android.app.Fragment {
         return v;
     }
 
+    /**
+     * Access Fields fro the View
+     * @param v - View
+     * @param m - Machine which should fill the data
+     */
     private void accessFields(View v, Machine m){
         txtMachineName = (TextView) v.findViewById(R.id.lblMachineName);
         txtMachineLocation = (TextView) v.findViewById(R.id.lblMachineLocation);
         txtMachineType = (TextView) v.findViewById(R.id.lblMachineTyp);
         imgOverview = (ImageView) v.findViewById(R.id.imgViewOverview);
+        fab = (FloatingActionButton) v.findViewById(R.id.fabAddMaintenance);
 
-        txtMachineName.setText(m.getS_Name());
-        txtMachineLocation.setText(m.getS_MachineLocation());
-        txtMachineType.setText(m.getS_MachineType());
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: ADD LOGIC FOR NEW MAINTENANCE
+                Intent intent = new Intent(getActivity(),CreateMaintenanceActivity.class);
+                intent.putExtra("Machine", detailedMachine);
+                startActivity(intent);
+            }
+        });
+
+        if(m!=null){
+            txtMachineName.setText(m.getS_Name());
+            txtMachineLocation.setText(m.getS_MachineLocation());
+            txtMachineType.setText(m.getS_MachineType());
+        }
     }
 
+    /**
+     * Try to download an Image for the Machine
+     * @param m - Machine which Image should be downloaded
+     */
     public void downloadImage(Machine m){
-        try{
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            StorageReference picRef = storageReference.child("MachinePhotos/"+m.getI_ID());
-            final long byteVal = 1024 * 1024;
-            final byte[][] vals = new byte[1][];
-            picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    try {
-                        File t = new File(getContext().getFilesDir()+"/temp.jpg");
-                        if(t.exists()){
-                            t.delete();
+        if(m!=null){
+            try{
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                StorageReference picRef = storageReference.child("MachinePhotos/"+m.getI_ID());
+                final long byteVal = 1024 * 1024;
+                final byte[][] vals = new byte[1][];
+                picRef.getBytes(byteVal).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        try {
+                            File t = new File(getContext().getFilesDir()+"/temp.jpg");
+                            if(t.exists()){
+                                t.delete();
+                            }
+
+                            File test = new File(getContext().getFilesDir(), "temp.jpg");
+                            FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                            st.write(bytes);
+                            Picasso.with(getActivity().getApplicationContext()).load(test).into(imgOverview);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-
-                        File test = new File(getContext().getFilesDir(), "temp.jpg");
-                        FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
-                        st.write(bytes);
-                        Picasso.with(getActivity().getApplicationContext()).load(test).into(imgOverview);
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("HERE");
-                }
-            });
-        }catch(Exception ex){
-            Log.d("DOWNLOAD ERROR", ex.toString());
-        };
-
-
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("HERE");
+                    }
+                });
+            }catch(Exception ex){
+                Log.d("DOWNLOAD ERROR", ex.toString());
+            };
+        }
     }
-
-
-
-
 }
