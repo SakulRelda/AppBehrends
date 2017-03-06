@@ -1,6 +1,7 @@
 package com.example.lukasadler.test1;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -41,20 +42,15 @@ public class CreateMachineActivity extends AppCompatActivity {
     private Machine machine = new Machine();
     private StorageReference mStorage;
     private Bitmap image;
+    private String s_barCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_machine);
-
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //CREATE HANDLER
         handler = FirebaseHandler.getInstance();
-        if(handler.checkLoggedIn()==false){
-            finish();
-            Intent intent = new Intent(CreateMachineActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-
         accessFields();
 
         //CREATE STORAGE OBJECT
@@ -128,6 +124,7 @@ public class CreateMachineActivity extends AppCompatActivity {
                 String scanContent = scanningResult.getContents();
                 String scanFormat = scanningResult.getFormatName();
                 machine.setS_BarcodeValue(scanContent);
+                s_barCode = scanContent;
             } else {
                 Toast t = Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_SHORT);
                 t.show();
@@ -190,6 +187,9 @@ public class CreateMachineActivity extends AppCompatActivity {
             machine.setS_Machinentyp(s_machineType.getText().toString());
             machine.setS_Name(s_machineName.getText().toString());
             machine.setS_MachineLocation(s_machineLocation.getText().toString());
+            if(s_barCode!=null){
+                machine.setS_BarcodeValue(s_barCode);
+            }
             FirebaseUser user = handler.getFirebaseUser();
             machine.setI_uID(user.getUid());
             handler.saveMachine(machine);

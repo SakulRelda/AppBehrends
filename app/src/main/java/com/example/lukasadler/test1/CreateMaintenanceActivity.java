@@ -1,6 +1,7 @@
 package com.example.lukasadler.test1;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_maintenance);
-
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //CHECK THE GIVEN INTENT
         Intent intent = getIntent();
         if(intent!= null){

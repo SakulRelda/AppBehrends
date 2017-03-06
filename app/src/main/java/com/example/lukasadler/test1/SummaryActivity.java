@@ -3,6 +3,7 @@ package com.example.lukasadler.test1;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -59,9 +60,12 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
         Window w = this.getWindow();
         w.setStatusBarColor(this.getResources().getColor(R.color.colorTeal));
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         accessFields();
         addTimer();
+
+
 
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
@@ -142,6 +146,10 @@ public class SummaryActivity extends AppCompatActivity {
         });
     }
 
+    private boolean isUserLoggedIn(){
+        return (handler.getFirebaseUser().isAnonymous()||handler.getFirebaseUser()==null);
+    }
+
 
     /**
      * Implements a Timer for the Exception that no Machines are available
@@ -163,9 +171,6 @@ public class SummaryActivity extends AppCompatActivity {
         floatingButton = (FloatingActionButton) findViewById(R.id.fab);
         linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
         list = (ListView) findViewById(R.id.listen);
-
-        handler = FirebaseHandler.getInstance();
-        user = handler.getFirebaseUser();
 
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Machine downloading...");
