@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -19,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Start Activity with the Login Possibility
+ * and the possibility to start the SignUp Activity
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -30,35 +30,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
 
 
-
+    /**
+     * Activity Lifecycle
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Ini for the Buttons, Fields...
-        signUpTextView = (TextView) findViewById(R.id.signUpTextView);
-        emailEditText = (AutoCompleteTextView) findViewById(R.id.email);
-        passwordEditText = (EditText) findViewById(R.id.password);
-        logInButton = (Button) findViewById(R.id.email_sign_in_button);
-
-
-        emailEditText.setText("sakulrelda@aol.com");
-        passwordEditText.setText("71292al");
-
-        progressBar = new ProgressDialog(this);
-        progressBar.setTitle("Authentication");
-        progressBar.setMessage("Login...");
-        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-
-        // Initialize FirebaseAuth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        if(mFirebaseAuth.getCurrentUser()!=null){
-            finish();
-            startActivity(new Intent(this, SummaryActivity.class));
-        }
+        accessFields();
+        checkIfUserLoggedIn();
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,20 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 signUpHandler();
             }
         });
-
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                progressBar.show();
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                email = email.trim();
-                password = password.trim();
-
-                loginHandler(email, password);
-                Log.d("MainAct","LoggedIn");
+            logInHandler();
             }
         });
 
@@ -95,11 +68,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Log In a User by its mail and pwd
+     */
+    private void logInHandler(){
+        progressBar.show();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        email = email.trim();
+        password = password.trim();
+        logInUserWithMailAndPwd(email, password);
+    }
+
+    /**
      * Method for the Login-Event
      * @param email
      * @param password
      */
-    public void loginHandler(String email, String password){
+    private void logInUserWithMailAndPwd(String email, String password){
         //If a required field is empty--> Error
         if (email.isEmpty() || password.isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -133,6 +119,38 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
+        }
+    }
+
+    /**
+     * Access the View Fields
+     */
+    private void accessFields(){
+        //Ini for the Buttons, Fields...
+        signUpTextView = (TextView) findViewById(R.id.signUpTextView);
+        emailEditText = (AutoCompleteTextView) findViewById(R.id.email);
+        passwordEditText = (EditText) findViewById(R.id.password);
+        logInButton = (Button) findViewById(R.id.email_sign_in_button);
+
+
+        emailEditText.setText("sakulrelda@aol.com");
+        passwordEditText.setText("71292al");
+
+        progressBar = new ProgressDialog(this);
+        progressBar.setTitle("Authentication");
+        progressBar.setMessage("Login...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    }
+
+    /**
+     * Check if a User is currently Logged In
+     */
+    private void checkIfUserLoggedIn(){
+        // Initialize FirebaseAuth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        if(mFirebaseAuth.getCurrentUser()!=null){
+            finish();
+            startActivity(new Intent(this, SummaryActivity.class));
         }
     }
 
