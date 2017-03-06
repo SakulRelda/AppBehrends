@@ -65,8 +65,6 @@ public class SummaryActivity extends AppCompatActivity {
         accessFields();
         addTimer();
 
-
-
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
         Query queryRef = databaseReference.orderByChild("i_uID").equalTo(user.getUid());
@@ -171,6 +169,9 @@ public class SummaryActivity extends AppCompatActivity {
         floatingButton = (FloatingActionButton) findViewById(R.id.fab);
         linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
         list = (ListView) findViewById(R.id.listen);
+
+        handler = FirebaseHandler.getInstance();
+        user = handler.getFirebaseUser();
 
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Machine downloading...");

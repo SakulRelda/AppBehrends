@@ -93,30 +93,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="10dp">
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnCreateMachine"
-                    android:layout_width="0dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="false"
-                    android:layout_weight="0.5"
                     android:textStyle="bold"
                     android:theme="@style/ButtonStyleTeal"
-                    android:text="@string/speichern_text"
-                    android:textAllCaps="true"/>
-
-                <Button
-                    android:id="@+id/btnAbortCreate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:textStyle="bold"
-                    android:theme="@style/ButtonStyleTeal"
-                    android:text="@string/abbrechen_text"
-                    android:textAllCaps="true"/>
+                    android:layout_gravity="center"
+                    android:text="@string/speichern_text" />
             </LinearLayout>
 
         </LinearLayout>

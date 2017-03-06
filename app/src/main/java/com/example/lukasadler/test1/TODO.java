@@ -13,5 +13,6 @@ public class TODO {
     //TODO: Login nicht auf jede Activiry geprüft
     //TODO: Bei Tabwechsel ändert sich die Selektierung des Tabs nicht
     //TODO: Maschinenübersicht - Zurücktaste beendet App - Frage nach Logout?
+    //TODO: Wartung anlegen - Datum könnte gleich im Datumswert angezeigt werden
 
 }
