@@ -55,6 +55,7 @@ public class CreateMachineActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+
         //GET VIEWS
         s_machineLocation = (EditText) findViewById(R.id.machineLocation);
         s_machineName = (EditText) findViewById(R.id.machineName);
@@ -64,8 +65,11 @@ public class CreateMachineActivity extends AppCompatActivity {
         fab_Camera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMachine);
         img_Machine = (ImageView) findViewById(R.id.imageViewNewMachine);
 
+
+
         //CREATE STORAGE OBJECT
         mStorage = FirebaseStorage.getInstance().getReference();
+
 
         if(!hasCamera()){
             fab_Camera.setEnabled(false);

@@ -22,5 +22,9 @@
     <string name="ja_text">JA</string>
     <string name="nein_text">NEIN</string>
     <string name="title_activity_create_machine">CreateMachineActivity</string>
-    <string name="speichern_text">SPEICHERN</string>
+    <string name="speichern_text">Speichern</string>
+    <string name="abbrechen_text">Abrechen</string>
+    <string name="machineCreated">Maschine erstellt</string>
+    <string name="machineAborted">Erstellen abgebrochen</string>
+    <string name="machineAbortedNoData">Fehler! Keine Daten</string>
 </resources>
