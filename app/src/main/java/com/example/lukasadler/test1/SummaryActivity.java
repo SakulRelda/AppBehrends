@@ -57,12 +57,9 @@ public class SummaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-        Window w = this.getWindow();
-        w.setStatusBarColor(this.getResources().getColor(R.color.colorTeal));
 
         accessFields();
         addTimer();
-
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
         Query queryRef = databaseReference.orderByChild("i_uID").equalTo(user.getUid());
