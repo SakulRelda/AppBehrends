@@ -35,7 +35,33 @@ public class MaintenanceFragment extends android.app.Fragment {
         Bundle b = this.getArguments();
         detailedMachine = (Machine) b.getSerializable("Machine");
         accessFields(v);
+        listViewHandling();
+        return v;
+    }
 
+    /**
+     * Access all Field from the View
+     * @param v - Current View
+     */
+    private void accessFields(View v){
+        listView = (ListView) v.findViewById(R.id.listMaintenance);
+        fab = (FloatingActionButton) v.findViewById(R.id.fabAddMaintenance);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CreateMaintenanceActivity.class);
+                intent.putExtra("Machine", detailedMachine);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Handels the List View Data and the Events
+     * Async loading Progress for the Maintenance Entrys
+     */
+    private void listViewHandling(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Maintenance");
         Query refQuery = databaseReference.orderByChild("s_machineID").equalTo(detailedMachine.getI_ID());
         FirebaseListAdapter<RepairHistory> firebaseListAdapter = new FirebaseListAdapter<RepairHistory>(
@@ -62,25 +88,6 @@ public class MaintenanceFragment extends android.app.Fragment {
                     intent.putExtra("Repair",rep);
                     getActivity().startActivity(intent);
                 }
-            }
-        });
-        return v;
-    }
-
-    /**
-     * Access all Field from the View
-     * @param v - Current View
-     */
-    private void accessFields(View v){
-        listView = (ListView) v.findViewById(R.id.listMaintenance);
-        fab = (FloatingActionButton) v.findViewById(R.id.fabAddMaintenance);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),CreateMaintenanceActivity.class);
-                intent.putExtra("Machine", detailedMachine);
-                startActivity(intent);
             }
         });
     }

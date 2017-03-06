@@ -36,11 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        passwordEditText = (EditText)findViewById(R.id.passwordField);
-        emailEditText = (AutoCompleteTextView)findViewById(R.id.emailField);
-        signUpButton = (Button)findViewById(R.id.signupButton);
-        handler = FirebaseHandler.getInstance();
+        accessFields();
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +50,16 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * Access the View Fields
+     */
+    private void accessFields(){
+        passwordEditText = (EditText)findViewById(R.id.passwordField);
+        emailEditText = (AutoCompleteTextView)findViewById(R.id.emailField);
+        signUpButton = (Button)findViewById(R.id.signupButton);
+        handler = FirebaseHandler.getInstance();
     }
 
 

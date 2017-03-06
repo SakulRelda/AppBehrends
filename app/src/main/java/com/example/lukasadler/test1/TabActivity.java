@@ -20,6 +20,10 @@ public class TabActivity extends AppCompatActivity {
 
     private Machine detailedMachine;
 
+	/**
+	 * Lifecylce Method of the Activity
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,6 +32,9 @@ public class TabActivity extends AppCompatActivity {
 		setupNavigationView();
 	}
 
+	/**
+	 * Reads the Value which is passed into the Activity
+	 */
 	private void readIntentValue(){
 		Intent intent = getIntent();
 		if(intent!=null){
@@ -37,6 +44,9 @@ public class TabActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Setup Method which creates the Tab Bottom Menu
+	 */
 	private void setupNavigationView() {
 		BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 		if (bottomNavigationView != null) {
@@ -57,8 +67,11 @@ public class TabActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Select the Fragment which should be displayed
+	 * @param item
+	 */
 	protected void selectFragment(MenuItem item) {
-
 		item.setChecked(true);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("Machine",detailedMachine);
@@ -77,7 +90,10 @@ public class TabActivity extends AppCompatActivity {
 	}
 
 
-
+	/**
+	 * Shows up a Fragment in the Activity
+	 * @param fragment
+	 */
 	protected void pushFragment(Fragment fragment) {
 		if (fragment == null)
 			return;
