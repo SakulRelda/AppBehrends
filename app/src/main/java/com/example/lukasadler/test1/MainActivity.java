@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected EditText passwordEditText;
     protected Button logInButton;
     protected TextView signUpTextView;
+    protected ProgressDialog progressBar;
     private FirebaseAuth mFirebaseAuth;
+
 
 
     @Override
@@ -62,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar = new ProgressDialog(v.getContext());
+                progressBar.setMessage("Login...");
+                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressBar.show();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
@@ -109,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             //If login is successfull--> then...
                             if (task.isSuccessful()) {
+                                progressBar.dismiss();
                                 Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
                                 startActivity(intent);
                             } else {

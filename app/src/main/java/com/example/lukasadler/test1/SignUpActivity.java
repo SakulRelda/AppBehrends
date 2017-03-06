@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import database.FirebaseHandler;
+
 /**
  * Sign Up Activity
  * Creating a new User
@@ -23,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected EditText passwordEditText;
     protected AutoCompleteTextView emailEditText;
     protected Button signUpButton;
+    private FirebaseHandler handler;
     private FirebaseAuth mFirebaseAuth;
 
 
@@ -37,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordEditText = (EditText)findViewById(R.id.passwordField);
         emailEditText = (AutoCompleteTextView)findViewById(R.id.emailField);
         signUpButton = (Button)findViewById(R.id.signupButton);
+        handler = FirebaseHandler.getInstance();
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onComplete(Task<AuthResult> task) {
                             //If creation was successfull --> Go back to the Main Activity
                             if (task.isSuccessful()) {
+                                handler.logOutUser();
                                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

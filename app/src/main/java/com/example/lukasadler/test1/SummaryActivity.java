@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import database.FirebaseHandler;
 import logical.Machine;
@@ -43,6 +46,8 @@ public class SummaryActivity extends AppCompatActivity {
     protected LinearLayout linearLayout;
     protected ListView list;
     protected FirebaseHandler handler;
+    protected ProgressDialog progressBar;
+    protected FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +56,8 @@ public class SummaryActivity extends AppCompatActivity {
         Window w = this.getWindow();
         w.setStatusBarColor(this.getResources().getColor(R.color.colorTeal));
 
-        //GET VIEWS
-        floatingButton = (FloatingActionButton) findViewById(R.id.fab);
-        linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
-        list = (ListView) findViewById(R.id.listen);
-
-        handler = FirebaseHandler.getInstance();
-        FirebaseUser user = handler.getFirebaseUser();
+        accessFields();
+        addTimer();
 
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
@@ -106,7 +106,7 @@ public class SummaryActivity extends AppCompatActivity {
                         dia.show();
                     }
                 });
-
+                progressBar.dismiss();
                 downloadImage(model, imgPic);
 
             }
@@ -136,6 +136,32 @@ public class SummaryActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    private void addTimer(){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                progressBar.dismiss();
+            }
+        },100);
+    }
+
+    private void accessFields(){
+        //GET VIEWS
+        floatingButton = (FloatingActionButton) findViewById(R.id.fab);
+        linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
+        list = (ListView) findViewById(R.id.listen);
+
+        handler = FirebaseHandler.getInstance();
+        user = handler.getFirebaseUser();
+
+        progressBar = new ProgressDialog(this);
+        progressBar.setMessage("Machine downloading...");
+        progressBar.setCancelable(true);
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.show();
     }
 
     @Override

@@ -20,7 +20,6 @@
         <activity
             android:name=".CreateMachineActivity"
             android:label="Neue Maschine" />
-        <activity android:name=".MachineMaintenanceActivity" />
         <activity
             android:name=".CreateMaintenanceActivity"
             android:label="Neuer Wartungseintrag" />
