@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -164,6 +165,32 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         histo.setS_machineID(machine.getI_ID());
         handler.saveMaintenance(histo);
         uploadImage(histo.getS_ID());
+    }
+
+    /**
+     * Checks if EditText is Empty
+     * @param etText --> Edit Text
+     * @return true --> EMPTY / false --> INSERT
+     */
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
+
+    /**
+     * Checks the Plausibility if all Files are exists
+     * @return bool true -> Plausi CORRECT / false -> Plausi WRONG
+     */
+    private boolean checkPlausibility(){
+        boolean retVal = true;
+        StringBuilder builder = new StringBuilder();
+        if(isEmpty(txtRepairDesc)){
+            builder.append("EMPTY REPAIR DESCRIPTION");
+            retVal=false;
+        }
+        if(retVal==false){
+            Toast.makeText(this,builder.toString(),Toast.LENGTH_LONG).show();
+        }
+        return retVal;
     }
 
 }

@@ -100,15 +100,12 @@ public class OverviewFragment extends android.app.Fragment {
                     @Override
                     public void onSuccess(byte[] bytes) {
                         try {
-                            File t = new File(getContext().getFilesDir()+"/temp.jpg");
-                            if(t.exists()){
-                                t.delete();
-                            }
+                            File outputDir = getContext().getCacheDir();
+                            File outputFile = File.createTempFile("temp.jpg",null,outputDir);
 
-                            File test = new File(getContext().getFilesDir(), "temp.jpg");
-                            FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                            FileOutputStream st = new FileOutputStream(outputFile.getAbsolutePath());
                             st.write(bytes);
-                            Picasso.with(getActivity().getApplicationContext()).load(test).into(imgOverview);
+                            Picasso.with(getActivity().getApplicationContext()).load(outputFile).into(imgOverview);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

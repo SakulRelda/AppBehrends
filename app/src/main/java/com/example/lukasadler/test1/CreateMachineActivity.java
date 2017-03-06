@@ -54,7 +54,7 @@ public class CreateMachineActivity extends AppCompatActivity {
             Intent intent = new Intent(CreateMachineActivity.this, MainActivity.class);
             startActivity(intent);
         }
-        
+
         accessFields();
 
         //CREATE STORAGE OBJECT
@@ -186,15 +186,51 @@ public class CreateMachineActivity extends AppCompatActivity {
      * Saves a Machine to the Database
      */
     private void saveMachineToDatabase(){
-        machine.setS_Machinentyp(s_machineType.getText().toString());
-        machine.setS_Name(s_machineName.getText().toString());
-        machine.setS_MachineLocation(s_machineLocation.getText().toString());
-        FirebaseUser user = handler.getFirebaseUser();
-        machine.setI_uID(user.getUid());
-        handler.saveMachine(machine);
-        uploadImage(machine.getI_ID());
-        finishActivity(0);
-        onBackPressed();
+        if(checkPlausibility()){
+            machine.setS_Machinentyp(s_machineType.getText().toString());
+            machine.setS_Name(s_machineName.getText().toString());
+            machine.setS_MachineLocation(s_machineLocation.getText().toString());
+            FirebaseUser user = handler.getFirebaseUser();
+            machine.setI_uID(user.getUid());
+            handler.saveMachine(machine);
+            uploadImage(machine.getI_ID());
+            finishActivity(RESULT_OK);
+            onBackPressed();
+        }
+    }
+
+    /**
+     * Checks if EditText is Empty
+     * @param etText --> Edit Text
+     * @return true --> EMPTY / false --> INSERT
+     */
+    private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
+
+    /**
+     * Checks the Plausibility if all Files are exists
+     * @return bool true -> Plausi CORRECT / false -> Plausi WRONG
+     */
+    private boolean checkPlausibility(){
+        boolean retVal = true;
+        StringBuilder builder = new StringBuilder();
+        if(isEmpty(s_machineName)){
+            builder.append("EMPTY MACHINE NAME \n");
+            retVal=false;
+        }
+        if(isEmpty(s_machineType)){
+            builder.append("EMPTY MACHINE TYPE \n");
+            retVal = false;
+        }
+        if(isEmpty(s_machineLocation)){
+            builder.append("EMPTY MACHINE LOCATION \n");
+            retVal = false;
+        }
+        if(retVal==false){
+            Toast.makeText(this,builder.toString(),Toast.LENGTH_LONG).show();
+        }
+        return retVal;
     }
 
 }

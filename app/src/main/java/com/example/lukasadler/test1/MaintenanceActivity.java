@@ -90,15 +90,12 @@ public class MaintenanceActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(byte[] bytes) {
                     try {
-                        File t = new File(getFilesDir()+"/temp.jpg");
-                        if(t.exists()){
-                            t.delete();
-                        }
+                        File outputDir = MaintenanceActivity.this.getCacheDir();
+                        File outputFile = File.createTempFile("temp.jpg",null,outputDir);
 
-                        File test = new File(getFilesDir(), "temp.jpg");
-                        FileOutputStream st = new FileOutputStream(test.getAbsolutePath());
+                        FileOutputStream st = new FileOutputStream(outputFile.getAbsolutePath());
                         st.write(bytes);
-                        Picasso.with(MaintenanceActivity.this.getApplicationContext()).load(test).into(imgMaintenanceOverview);
+                        Picasso.with(MaintenanceActivity.this.getApplicationContext()).load(outputFile).into(imgMaintenanceOverview);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
