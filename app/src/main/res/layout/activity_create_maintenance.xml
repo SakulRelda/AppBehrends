@@ -25,7 +25,6 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,7 +43,7 @@
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"
-                android:text="Datumswert"/>
+                android:text="@string/date"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
@@ -60,7 +59,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
-                android:hint="Beschreibung eingeben"
+                android:hint="@string/type_description"
                 android:drawableStart="@drawable/ic_description"
                 android:drawablePadding="8dp"
                 android:theme="@style/EditTextStyle"/>
@@ -74,7 +73,7 @@
                 android:textStyle="bold"
                 android:theme="@style/ButtonStyleTeal"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/speichern_text"/>
+                android:text="@string/save"/>
 
         </LinearLayout>
 

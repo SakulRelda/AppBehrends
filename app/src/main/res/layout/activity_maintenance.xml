@@ -40,7 +40,7 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:text="Wartungsdatum"
+                android:text="@string/maintenance_date"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal"/>
@@ -52,14 +52,13 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
-                android:text="Beschreibung"
+                android:text="@string/descritpion"
                 android:textSize="20dp"
                 android:drawableStart="@drawable/ic_description"
                 android:drawablePadding="8dp"
                 android:textColor="@color/colorTeal" />
 
         </LinearLayout>
-
 
     </LinearLayout>>
 

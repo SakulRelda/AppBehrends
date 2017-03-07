@@ -22,11 +22,27 @@
     <string name="ja_text">JA</string>
     <string name="nein_text">NEIN</string>
     <string name="title_activity_create_machine">CreateMachineActivity</string>
-    <string name="speichern_text">Speichern</string>
     <string name="abbrechen_text">Abrechen</string>
     <string name="machineCreated">Maschine erstellt</string>
     <string name="machineAborted">Erstellen abgebrochen</string>
     <string name="machineAbortedNoData">Fehler! Keine Daten</string>
+
+    <!-- German strings for UI -->
+    <string name="sign_up_german">Anmelden</string>
+    <string name="new_user">Neuer Benutzer</string>
+    <string name="registration">Registrieren</string>
+    <string name="registration_link"><u>Registrieren</u></string>
+    <string name="type_machine_name">Maschinenname eingeben</string>
+    <string name="type_machine_type">Maschinentyp eingeben</string>
+    <string name="type_machine_location">Maschinenstandort eingeben</string>
+    <string name="save">Speichern</string>
+    <string name="type_description">Beschreibung eingeben</string>
+    <string name="date">Datum</string>
+    <string name="maintenance_date">Wartungsdatum</string>
+    <string name="descritpion">Beschreibung</string>
+    <string name="machinename">Maschinenname</string>
+    <string name="machinetype">Maschinentyp</string>
+    <string name="machinelocation">Maschinenstandort</string>
     <string name="maintenanceCreated">Wartung erstellt</string>
     <string name="maintenanceAborted">Erstellen abgebrochen</string>
 </resources>
