@@ -27,4 +27,6 @@
     <string name="machineCreated">Maschine erstellt</string>
     <string name="machineAborted">Erstellen abgebrochen</string>
     <string name="machineAbortedNoData">Fehler! Keine Daten</string>
+    <string name="maintenanceCreated">Wartung erstellt</string>
+    <string name="maintenanceAborted">Erstellen abgebrochen</string>
 </resources>

@@ -43,6 +43,7 @@ public class CreateMachineActivity extends AppCompatActivity {
     private StorageReference mStorage;
     private Bitmap image;
     private String s_barCode;
+    private int finisherCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +195,7 @@ public class CreateMachineActivity extends AppCompatActivity {
             machine.setI_uID(user.getUid());
             handler.saveMachine(machine);
             uploadImage(machine.getI_ID());
-            finishActivity(RESULT_OK);
+            finisherCode = 1;
             onBackPressed();
         }
     }
@@ -233,4 +234,18 @@ public class CreateMachineActivity extends AppCompatActivity {
         return retVal;
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if(finisherCode==1){
+            Intent retIntent = new Intent();
+            setResult(RESULT_OK, retIntent);
+            finish();
+        }else{
+            Intent retIntent = new Intent();
+            setResult(RESULT_CANCELED, retIntent);
+            finish();
+        }
+        super.onBackPressed();
+    }
 }

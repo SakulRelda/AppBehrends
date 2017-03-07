@@ -39,6 +39,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private Machine machine;
     private Bitmap image;
     private StorageReference mStorage;
+    private int finisherCode = 0;
     private final int REQUEST_IMAGE_CAPTURE = 1;
 
     /**
@@ -166,6 +167,8 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         histo.setS_machineID(machine.getI_ID());
         handler.saveMaintenance(histo);
         uploadImage(histo.getS_ID());
+        finisherCode=1;
+        onBackPressed();
     }
 
     /**
@@ -192,6 +195,20 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
             Toast.makeText(this,builder.toString(),Toast.LENGTH_LONG).show();
         }
         return retVal;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(finisherCode==1){
+            Intent retIntent = new Intent();
+            setResult(RESULT_OK, retIntent);
+            finish();
+        }else{
+            Intent retIntent = new Intent();
+            setResult(RESULT_CANCELED, retIntent);
+            finish();
+        }
+        super.onBackPressed();
     }
 
 }

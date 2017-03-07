@@ -1,5 +1,6 @@
 package com.example.lukasadler.test1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,7 +76,7 @@ public class OverviewFragment extends android.app.Fragment {
                 //TODO: ADD LOGIC FOR NEW MAINTENANCE
                 Intent intent = new Intent(getActivity(),CreateMaintenanceActivity.class);
                 intent.putExtra("Machine", detailedMachine);
-                startActivity(intent);
+                startActivityForResult(intent, Activity.RESULT_CANCELED);
             }
         });
 
@@ -119,6 +121,39 @@ public class OverviewFragment extends android.app.Fragment {
             }catch(Exception ex){
                 Log.d("DOWNLOAD ERROR", ex.toString());
             };
+        }
+    }
+
+
+
+
+    /**
+     * Lifecycle of the Activity
+     * --> If the Activity gets a Result
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast t;
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode)
+        {
+            case SummaryActivity.RESULT_OK:
+                t = Toast.makeText(getActivity(), R.string.maintenanceCreated, Toast.LENGTH_SHORT);
+                t.show();
+                break;
+            case SummaryActivity.RESULT_CANCELED:
+                int toastText = R.string.maintenanceAborted;
+                if(data != null) {
+                    toastText = data.getIntExtra("result", R.string.maintenanceAborted);
+                }
+                t = Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT);
+                t.show();
+                break;
+            default:
+                break;
         }
     }
 }

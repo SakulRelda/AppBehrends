@@ -3,4 +3,8 @@
 
     <item android:title="Logout"
         android:id="@+id/logOutMenu" />
+    <item android:title="Create Machine Type"
+        android:id="@+id/addMachineTypeMenu" />
+    <item android:title="Search Machine"
+        android:id="@+id/searchBarcodeMenu" />
 </menu>

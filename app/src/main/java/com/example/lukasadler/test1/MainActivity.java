@@ -154,6 +154,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Disable the Back Button Event
+     */
+    @Override
+    public void onBackPressed() {
+        //DO NOTHING
+    }
 }
 
 

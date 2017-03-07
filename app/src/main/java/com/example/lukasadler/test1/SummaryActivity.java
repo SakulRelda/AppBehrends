@@ -138,7 +138,7 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent createMachineIntent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
-                startActivityForResult(createMachineIntent, 0);
+                startActivityForResult(createMachineIntent, RESULT_CANCELED);
 
             }
         });
@@ -172,7 +172,6 @@ public class SummaryActivity extends AppCompatActivity {
 
         handler = FirebaseHandler.getInstance();
         user = handler.getFirebaseUser();
-
         progressBar = new ProgressDialog(this);
         progressBar.setMessage("Machine downloading...");
         progressBar.setCancelable(true);
@@ -193,11 +192,11 @@ public class SummaryActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode)
         {
-            case RESULT_OK:
+            case SummaryActivity.RESULT_OK:
                 t = Toast.makeText(this, R.string.machineCreated, Toast.LENGTH_SHORT);
                 t.show();
                 break;
-            case RESULT_CANCELED:
+            case SummaryActivity.RESULT_CANCELED:
                 int toastText = R.string.machineAborted;
                 if(data != null) {
                     toastText = data.getIntExtra("result", R.string.machineAborted);
@@ -282,4 +281,33 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Disable the Back Button Event
+     */
+    @Override
+    public void onBackPressed() {
+        //DO NOTHING
+        AlertDialog.Builder alertLog = new AlertDialog.Builder(this);
+        alertLog.setMessage("Do you wanna logout?").setTitle("Logout?");
+        alertLog.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FirebaseHandler h = FirebaseHandler.getInstance();
+                boolean logout = h.logOutUser();
+                if (logout) {
+                    Intent intent = new Intent(SummaryActivity.this
+                            , MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        alertLog.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //DO NOTHING
+            }
+        });
+        AlertDialog alert = alertLog.create();
+        alert.show();
+    }
 }
