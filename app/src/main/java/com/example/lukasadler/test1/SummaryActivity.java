@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -26,11 +27,16 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -189,12 +195,56 @@ public class SummaryActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Toast t;
+        int barcodeRes = -1;
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode)
         {
             case SummaryActivity.RESULT_OK:
-                t = Toast.makeText(this, R.string.machineCreated, Toast.LENGTH_SHORT);
-                t.show();
+                if(requestCode==49374){
+                    IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                    if (scanningResult != null) {
+                        String scanContent = scanningResult.getContents();
+                        String scanFormat = scanningResult.getFormatName();
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
+                        databaseReference.orderByChild("s_BarcodeValue").equalTo(scanContent).addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                Machine scannedMachine = (Machine) dataSnapshot.getValue(Machine.class);
+                                if(scannedMachine!=null){
+                                    Intent intent = new Intent(getApplicationContext(), TabActivity.class);
+                                    intent.putExtra("Machine", scannedMachine);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("CANCELED");
+                            }
+                        });
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }else{
+                    t = Toast.makeText(this, R.string.machineCreated, Toast.LENGTH_SHORT);
+                    t.show();
+                }
                 break;
             case SummaryActivity.RESULT_CANCELED:
                 int toastText = R.string.machineAborted;
@@ -204,6 +254,7 @@ public class SummaryActivity extends AppCompatActivity {
                 t = Toast.makeText(this, toastText, Toast.LENGTH_SHORT);
                 t.show();
                 break;
+
             default:
                 break;
         }
@@ -239,9 +290,33 @@ public class SummaryActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 return true;
+
+            case R.id.searchBarcodeMenu:
+                if(hasCamera()){
+                    barcodeSnap();
+                }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    /**
+     * Has the System a Camera
+     * @return true -> Camera / false -> No Camera
+     */
+    private boolean hasCamera(){
+        return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
+    }
+
+    /**
+     * Does a Barcode Snap
+     */
+    private void barcodeSnap(){
+        IntentIntegrator scanIntegrator = new IntentIntegrator(SummaryActivity.this);
+        scanIntegrator.initiateScan();
     }
 
     /**
