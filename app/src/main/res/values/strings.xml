@@ -45,4 +45,6 @@
     <string name="machinelocation">Maschinenstandort</string>
     <string name="maintenanceCreated">Wartung erstellt</string>
     <string name="maintenanceAborted">Erstellen abgebrochen</string>
+    <string name="type_shortDescription">Kurzbeschreibung eingeben</string>
+    <string name="shortDescription">Kurzbeschreibung</string>
 </resources>

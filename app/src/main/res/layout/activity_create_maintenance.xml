@@ -36,7 +36,7 @@
                 android:id="@+id/txtRepairDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="italic"
                 android:textSize="20dp"
@@ -52,13 +52,32 @@
                 android:textColorHint="@color/colorTeal"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
+                <EditText
+                    android:id="@+id/txtShortDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="20"
+                    android:hint="@string/type_shortDescription"
+                    android:drawableStart="@drawable/ic_short_description"
+                    android:drawablePadding="8dp"
+                    android:theme="@style/EditTextStyle"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/colorTeal"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
             <EditText
                 android:id="@+id/txtRepairDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="italic"
                 android:hint="@string/type_description"
                 android:drawableStart="@drawable/ic_description"
                 android:drawablePadding="8dp"
@@ -69,7 +88,7 @@
                 android:id="@+id/btnCreateMaintenance"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:theme="@style/ButtonStyleTeal"
                 android:layout_gravity="center_horizontal"

@@ -46,6 +46,19 @@
                 android:textColor="@color/colorTeal"/>
 
             <TextView
+                android:id="@+id/lblMaintenanceShort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="@string/shortDescription"
+                android:textSize="20dp"
+                android:drawableStart="@drawable/ic_short_description"
+                android:drawablePadding="8dp"
+                android:textColor="@color/colorTeal" />
+
+            <TextView
                 android:id="@+id/lblMaintenanceDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

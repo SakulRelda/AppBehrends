@@ -26,6 +26,7 @@ public class MaintenanceActivity extends AppCompatActivity {
     private RepairHistory repHisto;
     private TextView txtMaintenanceDate;
     private TextView txtMaintenanceDescription;
+  //  private TextView txtMaintenanceShortDescription;
     private ImageView imgMaintenanceOverview;
 
     //Database Handler
@@ -64,6 +65,7 @@ public class MaintenanceActivity extends AppCompatActivity {
     private void connectViews(){
         txtMaintenanceDate = (TextView) findViewById(R.id.lblMaintenanceDate);
         txtMaintenanceDescription = (TextView) findViewById(R.id.lblMaintenanceDescription);
+       // txtMaintenanceShortDescription = (TextView) findViewById(R.id.lblMaintenanceShort);
         imgMaintenanceOverview = (ImageView) findViewById(R.id.imgMaintenanceOverview);
     }
 
@@ -75,6 +77,7 @@ public class MaintenanceActivity extends AppCompatActivity {
             android.text.format.DateFormat df = new android.text.format.DateFormat();
             txtMaintenanceDate.setText("Wartung: "+df.format("dd-MM-yyyy",repHisto.getD_repairDate()));
             txtMaintenanceDescription.setText(repHisto.getS_Description());
+         //   getTxtMaintenanceShortDescription.setText(repHisto.getS_ShortDescription());
             downloadImage(repHisto);
         }
     }

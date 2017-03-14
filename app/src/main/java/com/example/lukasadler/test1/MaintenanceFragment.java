@@ -88,8 +88,6 @@ public class MaintenanceFragment extends android.app.Fragment {
                 android.text.format.DateFormat df = new android.text.format.DateFormat();
                 txtView.setText("Wartung: "+df.format("dd-MM-yyyy",model.getD_repairDate()));
 
-                ImageView imgView = (ImageView) v.findViewById(R.id.imageViewMaintenance);
-                downloadImage(model,imgView);
             }
         };
         listView.setAdapter(firebaseListAdapter);

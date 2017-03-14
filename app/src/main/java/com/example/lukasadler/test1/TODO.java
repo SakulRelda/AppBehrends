@@ -12,5 +12,7 @@ public class TODO {
     //TODO: Bei Tabwechsel ändert sich die Selektierung des Tabs nicht
     //TODO: Maschinenübersicht - Zurücktaste beendet App - Frage nach Logout?
     //TODO: Wartung anlegen - Datum könnte gleich im Datumswert angezeigt werden
+    //TODO: Wartung Kurzbeschreibung FEld 20 Zeichen short_descritpion
+    //TODO: Maintenance List View Bild weg , löschen, oben title unten short description
 
 }

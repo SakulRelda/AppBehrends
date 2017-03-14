@@ -14,23 +14,34 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearMaintenanceLayout"
         android:orientation="horizontal">
-        <ImageView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageViewMaintenance"
-            app:srcCompat="@android:drawable/ic_menu_report_image" />
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingRight="130dp">
+
+            <TextView
+                android:id="@+id/listItemMaintenanceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hallo"
+                android:textColor="@color/colorTeal"
+                android:textSize="48px"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/listItemMaintenanceTitle"
-                android:paddingLeft="40dp"
-                android:textStyle="bold"
-                android:textSize="50px"
-                android:textColor="@color/colorTeal"
-                android:text="hallo"/>
+                android:text="Kurzbeschreibung"/>
+        </LinearLayout>
 
-
+        <ImageView
+            android:id="@+id/listItemDeleteMaintenance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_delete"/>
     </LinearLayout>
 
 
