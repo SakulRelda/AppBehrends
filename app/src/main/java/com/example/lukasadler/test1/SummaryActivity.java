@@ -47,6 +47,10 @@ import java.util.TimerTask;
 import database.FirebaseHandler;
 import logical.Machine;
 
+/**
+ *
+ * @author Lukas Adler / Artur Stalbaum
+ */
 public class SummaryActivity extends AppCompatActivity {
 
     protected FloatingActionButton floatingButton;
@@ -219,17 +223,17 @@ public class SummaryActivity extends AppCompatActivity {
 
                             @Override
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                                //DO NOTHING
                             }
 
                             @Override
                             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                                //DO NOTHING
                             }
 
                             @Override
                             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                                //DO NOTHING
                             }
 
                             @Override

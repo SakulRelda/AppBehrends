@@ -85,7 +85,9 @@ public class MaintenanceFragment extends android.app.Fragment {
             @Override
             protected void populateView(View v, RepairHistory model, int position) {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemMaintenanceTitle);
+                TextView txtViewShortDesc = (TextView) v.findViewById(R.id.txtShortDescItem);
                 android.text.format.DateFormat df = new android.text.format.DateFormat();
+                txtViewShortDesc.setText(model.getS_shortDescr());
                 txtView.setText("Wartung: "+df.format("dd-MM-yyyy",model.getD_repairDate()));
 
             }

@@ -32,6 +32,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
     private ImageView imgViewMaintenance;
     private TextView txtRepairDate;
     private EditText txtRepairDesc;
+    private EditText txtRepairShortDesc;
     private Button fab;
     private FloatingActionButton fabCamera;
     private Button saveMaintenance;
@@ -116,6 +117,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         txtRepairDesc = (EditText) findViewById(R.id.txtRepairDescription);
         fabCamera = (FloatingActionButton) findViewById(R.id.fabOpenCameraMaintenance);
         saveMaintenance = (Button) findViewById(R.id.btnCreateMaintenance);
+        txtRepairShortDesc = (EditText) findViewById(R.id.txtShortDescription);
     }
 
     /**
@@ -165,6 +167,7 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         histo.setS_author(machine.getI_uID());
         histo.setS_Description(txtRepairDesc.getText().toString());
         histo.setS_machineID(machine.getI_ID());
+        histo.setS_shortDescr(txtRepairShortDesc.getText().toString());
         handler.saveMaintenance(histo);
         uploadImage(histo.getS_ID());
         finisherCode=1;
@@ -189,6 +192,10 @@ public class CreateMaintenanceActivity extends AppCompatActivity {
         StringBuilder builder = new StringBuilder();
         if(isEmpty(txtRepairDesc)){
             builder.append("EMPTY REPAIR DESCRIPTION");
+            retVal=false;
+        }
+        if(isEmpty(txtRepairShortDesc)){
+            builder.append("EMPTY REPAIR SHORT DESC");
             retVal=false;
         }
         if(retVal==false){
