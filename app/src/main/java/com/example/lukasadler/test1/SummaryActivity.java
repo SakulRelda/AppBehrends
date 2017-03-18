@@ -90,15 +90,7 @@ public class SummaryActivity extends AppCompatActivity {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemTitle);
                 txtView.setText(model.getS_Name());
                 final ImageView imgPic = (ImageView) v.findViewById(R.id.imageViewItems);
-                ImageView imgViewEdit = (ImageView) v.findViewById(R.id.listItemEdit);
                 ImageView imgViewDelete = (ImageView) v.findViewById(R.id.listItemDelete);
-
-                imgViewEdit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //TODO: EDIT LOGIC
-                    }
-                });
 
                 imgViewDelete.setOnClickListener(new View.OnClickListener() {
                     @Override

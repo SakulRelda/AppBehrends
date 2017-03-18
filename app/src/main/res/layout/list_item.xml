@@ -37,23 +37,13 @@
                 android:layout_height="wrap_content"
                 android:text="Sonstige Informationen"/>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/listItemEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/linearLayoutItems"
-            android:paddingLeft="40dp"
-            android:src="@drawable/ic_edit"/>
 
         <ImageView
             android:id="@+id/listItemDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/listItemEdit"
-            android:layout_below="@+id/listItemEdit"
-            android:paddingLeft="20dp"
+            android:paddingLeft="100dp"
             android:src="@android:drawable/ic_delete"/>
     </LinearLayout>
-
 
 </RelativeLayout>

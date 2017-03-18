@@ -32,19 +32,6 @@
             android:background="@color/accent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtRepairDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:textStyle="italic"
-                android:textSize="20dp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawablePadding="8dp"
-                android:textColor="@color/colorTeal"
-                android:text="@string/date"/>
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
