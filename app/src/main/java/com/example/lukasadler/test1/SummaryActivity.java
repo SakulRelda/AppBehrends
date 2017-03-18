@@ -47,6 +47,8 @@ import java.util.TimerTask;
 import database.FirebaseHandler;
 import logical.Machine;
 
+import static android.os.Build.VERSION_CODES.M;
+
 /**
  *
  * @author Lukas Adler / Artur Stalbaum
@@ -367,7 +369,8 @@ public class SummaryActivity extends AppCompatActivity {
     public void onBackPressed() {
         //DO NOTHING
         AlertDialog.Builder alertLog = new AlertDialog.Builder(this);
-        alertLog.setMessage("Do you wanna logout?").setTitle("Logout?");
+        alertLog.setTitle(R.string.action_logout);
+        alertLog.setMessage(R.string.logout_question);
         alertLog.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

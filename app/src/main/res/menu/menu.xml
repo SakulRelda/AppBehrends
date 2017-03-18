@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Logout"
+    <item android:title="@string/action_logout"
         android:id="@+id/logOutMenu" />
-    <item android:title="Create Machine Type"
+    <item android:title="@string/create_machinetyp"
         android:id="@+id/addMachineTypeMenu" />
-    <item android:title="Search Machine"
+    <item android:title="@string/search_machine"
         android:id="@+id/searchBarcodeMenu" />
 </menu>

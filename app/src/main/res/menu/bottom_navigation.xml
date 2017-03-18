@@ -4,9 +4,9 @@
 	<item
 		android:id="@+id/fragment_overview"
 		android:icon="@drawable/ic_overview_black"
-		android:title="Übersicht"/>
+		android:title="@string/overview"/>
 	<item
 		android:id="@+id/fragment_main"
 		android:icon="@drawable/ic_main_black"
-		android:title="Wartungen"/>
+		android:title="@string/maintenance_string"/>
 </menu>

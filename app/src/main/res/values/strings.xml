@@ -27,8 +27,10 @@
     <string name="machineAborted">Erstellen abgebrochen</string>
     <string name="machineAbortedNoData">Fehler! Keine Daten</string>
 
+    <!-- Maintenance string -->
     <string name="delete_maintenance">Wartung löschen?</string>
     <string name="delete_maintenance_text">Möchten Sie diese Wartung wirklich löschen?</string>
+
     <!-- German strings for UI -->
     <string name="sign_up_german">Anmelden</string>
     <string name="passwort">Passwort</string>
@@ -50,4 +52,10 @@
     <string name="maintenanceAborted">Erstellen abgebrochen</string>
     <string name="type_shortDescription">Kurzbeschreibung eingeben</string>
     <string name="shortDescription">Kurzbeschreibung</string>
+    <string name="overview">Überblick</string>
+    <string name="maintenance_string">Wartungen</string>
+    <string name="create_machinetyp">Maschinentyp erstellen</string>
+    <string name="search_machine">Maschine suchen</string>
+    <string name="logout_question">Möchten Sie sich wirklich abmelden?</string>
+    <string name="load_machine_string">Maschinen werden geladen</string>
 </resources>
