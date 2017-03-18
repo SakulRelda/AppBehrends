@@ -22,13 +22,16 @@
     <string name="ja_text">JA</string>
     <string name="nein_text">NEIN</string>
     <string name="title_activity_create_machine">CreateMachineActivity</string>
-    <string name="abbrechen_text">Abrechen</string>
+    <string name="abbrechen_text">Abbrechen</string>
     <string name="machineCreated">Maschine erstellt</string>
     <string name="machineAborted">Erstellen abgebrochen</string>
     <string name="machineAbortedNoData">Fehler! Keine Daten</string>
 
+    <string name="delete_maintenance">Wartung löschen?</string>
+    <string name="delete_maintenance_text">Möchten Sie diese Wartung wirklich löschen?</string>
     <!-- German strings for UI -->
     <string name="sign_up_german">Anmelden</string>
+    <string name="passwort">Passwort</string>
     <string name="new_user">Neuer Benutzer</string>
     <string name="registration">Registrieren</string>
     <string name="registration_link"><u>Registrieren</u></string>

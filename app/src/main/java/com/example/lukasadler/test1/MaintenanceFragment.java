@@ -1,6 +1,8 @@
 package com.example.lukasadler.test1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,6 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import database.FirebaseHandler;
 import logical.Machine;
 import logical.RepairHistory;
 
@@ -40,6 +43,7 @@ public class MaintenanceFragment extends android.app.Fragment {
     private Machine detailedMachine;
     private FloatingActionButton fab;
     private ListView listView;
+
 
     @Nullable
     @Override
@@ -83,12 +87,37 @@ public class MaintenanceFragment extends android.app.Fragment {
                 R.layout.maintenance_list_item,
                 refQuery) {
             @Override
-            protected void populateView(View v, RepairHistory model, int position) {
+            protected void populateView(View v, final RepairHistory model, int position) {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemMaintenanceTitle);
                 TextView txtViewShortDesc = (TextView) v.findViewById(R.id.txtShortDescItem);
                 android.text.format.DateFormat df = new android.text.format.DateFormat();
                 txtViewShortDesc.setText(model.getS_shortDescr());
                 txtView.setText("Wartung: "+df.format("dd-MM-yyyy",model.getD_repairDate()));
+                ImageView imgViewDeleteMain = (ImageView) v.findViewById(R.id.listItemDeleteMaintenance);
+
+                imgViewDeleteMain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder dia = new AlertDialog.Builder(v.getRootView().getContext());
+                        dia.setTitle(R.string.delete_maintenance);
+                        dia.setMessage(R.string.delete_maintenance_text);
+                        dia.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //DELETE PRESS YES
+              /*                  Toast.makeText(MaintenanceFragment.this, model.getD_repairDate(), Toast.LENGTH_SHORT).show();
+                                FirebaseHandler h = FirebaseHandler.getInstance();
+                                h.deleteMachine(model);*/
+                            }
+                        });
+                        dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //DELETE PRESS NO
+                               // Toast.makeText(MaintenanceFragment.this, "DELETED", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dia.show();
+                    }
+                });
 
             }
         };
