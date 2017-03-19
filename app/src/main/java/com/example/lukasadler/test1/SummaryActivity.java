@@ -47,8 +47,6 @@ import java.util.TimerTask;
 import database.FirebaseHandler;
 import logical.Machine;
 
-import static android.os.Build.VERSION_CODES.M;
-
 /**
  *
  * @author Lukas Adler / Artur Stalbaum
@@ -102,15 +100,16 @@ public class SummaryActivity extends AppCompatActivity {
                         dia.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS YES
-                                Toast.makeText(SummaryActivity.this, model.getS_Name(), Toast.LENGTH_SHORT).show();
+
                                 FirebaseHandler h = FirebaseHandler.getInstance();
                                 h.deleteMachine(model);
+                                Toast.makeText(SummaryActivity.this, "DELETED", Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS NO
-                                Toast.makeText(SummaryActivity.this, "DELETED", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SummaryActivity.this, "ABGEBROCHEN", Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.show();
