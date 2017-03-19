@@ -75,19 +75,18 @@ public class TabActivity extends AppCompatActivity {
 	 */
 	protected void selectFragment(MenuItem item) {
 		item.setChecked(true);
+		BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("Machine",detailedMachine);
 		switch (item.getItemId()) {
 			case R.id.fragment_overview:
-				MenuItem menuItemOverview = (MenuItem) findViewById(R.id.fragment_main);
-				menuItemOverview.setChecked(false);
+				bottomNavigationView.getMenu().findItem(R.id.fragment_main).setChecked(false);
 				OverviewFragment overviewFragment = new OverviewFragment();
 				overviewFragment.setArguments(bundle);
 				pushFragment(overviewFragment);
 				break;
 			case R.id.fragment_main:
-				MenuItem menuItemMain = (MenuItem) findViewById(R.id.fragment_overview);
-				menuItemMain.setChecked(false);
+				bottomNavigationView.getMenu().findItem(R.id.fragment_overview).setChecked(false);
 				MaintenanceFragment mainFragment = new MaintenanceFragment();
 				mainFragment.setArguments(bundle);
 				pushFragment(mainFragment);
