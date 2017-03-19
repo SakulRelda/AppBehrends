@@ -118,10 +118,30 @@ public class FirebaseHandler {
      * @return bool true if it was successfull
      */
     public boolean deleteMachine(Machine machine){
-        DatabaseReference refDatabase = FirebaseDatabase.getInstance().getReference();
-        String key = machine.getI_ID();
-        refDatabase.child("Machine").child(key).removeValue();
-        return true;
+        try{
+            DatabaseReference refDatabase = FirebaseDatabase.getInstance().getReference();
+            String key = machine.getI_ID();
+            refDatabase.child("Machine").child(key).removeValue();
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
+    }
+
+    /**
+     * Delete an Object from the Database
+     * @param history
+     * @return bool true if it was successfull
+     */
+    public boolean deleteMaintenance(RepairHistory history){
+        try{
+            DatabaseReference refDatabase = FirebaseDatabase.getInstance().getReference();
+            String key = history.getS_ID();
+            refDatabase.child("Maintenance").child(key).removeValue();
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 
     /**

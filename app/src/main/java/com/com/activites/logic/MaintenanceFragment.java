@@ -92,7 +92,7 @@ public class MaintenanceFragment extends android.app.Fragment {
                 TextView txtViewShortDesc = (TextView) v.findViewById(R.id.txtShortDescItem);
                 android.text.format.DateFormat df = new android.text.format.DateFormat();
                 txtViewShortDesc.setText(model.getS_shortDescr());
-                txtView.setText("Wartung: "+df.format("dd-MM-yyyy",model.getD_repairDate()));
+                txtView.setText(df.format("dd-MM-yyyy",model.getD_repairDate()));
                 ImageView imgViewDeleteMain = (ImageView) v.findViewById(R.id.listItemDeleteMaintenance);
 
                 imgViewDeleteMain.setOnClickListener(new View.OnClickListener() {
@@ -104,15 +104,15 @@ public class MaintenanceFragment extends android.app.Fragment {
                         dia.setPositiveButton(R.string.ja_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS YES
-              /*                  Toast.makeText(MaintenanceFragment.this, model.getD_repairDate(), Toast.LENGTH_SHORT).show();
                                 FirebaseHandler h = FirebaseHandler.getInstance();
-                                h.deleteMachine(model);*/
+                                h.deleteMaintenance(model);
+                                Toast.makeText(getActivity(),"DELETED",Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS NO
-                               // Toast.makeText(MaintenanceFragment.this, "DELETED", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "ABGEBROCHEN", Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.show();
