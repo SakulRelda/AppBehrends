@@ -8,24 +8,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.com.activites.logic.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SummaryActivity" />
+        <activity android:name="com.com.activites.logic.SignUpActivity" />
+        <activity android:name="com.com.activites.logic.SummaryActivity" />
         <activity
-            android:name=".CreateMachineActivity"
+            android:name="com.com.activites.logic.CreateMachineActivity"
             android:label="Neue Maschine" />
         <activity
-            android:name=".CreateMaintenanceActivity"
+            android:name="com.com.activites.logic.CreateMaintenanceActivity"
             android:label="Neuer Wartungseintrag" />
-        <activity android:name=".TabActivity" />
+        <activity android:name="com.com.activites.logic.TabActivity" />
         <activity
-            android:name=".MaintenanceActivity"
+            android:name="com.com.activites.logic.MaintenanceActivity"
             android:label="Wartungen" />
     </application>
 

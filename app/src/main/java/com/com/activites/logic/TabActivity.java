@@ -1,4 +1,4 @@
-package com.example.lukasadler.test1;
+package com.com.activites.logic;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -11,6 +11,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.lukasadler.test1.R;
 
 import logical.Machine;
 
