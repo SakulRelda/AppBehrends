@@ -1,4 +1,4 @@
-package com.example.lukasadler.test1;
+package com.com.activites.logic;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lukasadler.test1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

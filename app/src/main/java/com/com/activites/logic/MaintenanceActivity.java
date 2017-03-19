@@ -1,4 +1,4 @@
-package com.example.lukasadler.test1;
+package com.com.activites.logic;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lukasadler.test1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
