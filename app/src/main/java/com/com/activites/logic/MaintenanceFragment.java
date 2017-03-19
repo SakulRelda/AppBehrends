@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import database.FirebaseHandler;
 import logical.Machine;
 import logical.RepairHistory;
 
@@ -106,7 +107,7 @@ public class MaintenanceFragment extends android.app.Fragment {
                                 //DELETE PRESS YES
                                 FirebaseHandler h = FirebaseHandler.getInstance();
                                 h.deleteMaintenance(model);
-                                Toast.makeText(getActivity(),"DELETED",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),R.string.maintenance_deleted,Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {

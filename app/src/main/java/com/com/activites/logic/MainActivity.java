@@ -138,8 +138,10 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText.setText("71292al");
 
         progressBar = new ProgressDialog(this);
-        progressBar.setTitle("Authentication");
-        progressBar.setMessage("Login...");
+        String s_auth = getResources().getString(R.string.authentication);
+        progressBar.setTitle(s_auth);
+        String s_authMessage = getResources().getString(R.string.login_progress);
+        progressBar.setMessage(s_authMessage);
         progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 

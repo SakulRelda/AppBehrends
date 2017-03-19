@@ -87,7 +87,9 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             protected void populateView(View v, final Machine model, int position) {
                 TextView txtView = (TextView) v.findViewById(R.id.listItemTitle);
+                TextView txtLocation = (TextView) v.findViewById(R.id.txtListItemLocation);
                 txtView.setText(model.getS_Name());
+                txtLocation.setText("Standort: "+model.getS_MachineLocation());
                 final ImageView imgPic = (ImageView) v.findViewById(R.id.imageViewItems);
                 ImageView imgViewDelete = (ImageView) v.findViewById(R.id.listItemDelete);
 
@@ -177,7 +179,8 @@ public class SummaryActivity extends AppCompatActivity {
         handler = FirebaseHandler.getInstance();
         user = handler.getFirebaseUser();
         progressBar = new ProgressDialog(this);
-        progressBar.setMessage("Machine downloading...");
+        String s_dl = getResources().getString(R.string.machine_download);
+        progressBar.setMessage(s_dl);
         progressBar.setCancelable(true);
         progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressBar.show();
