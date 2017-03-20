@@ -26,6 +26,8 @@
     <string name="machineCreated">Maschine erstellt</string>
     <string name="machineAborted">Erstellen abgebrochen</string>
     <string name="machineAbortedNoData">Fehler! Keine Daten</string>
+    <string name="machineAbortDelete">Löschen abgebrochen</string>
+    <string name="machineDelted">Maschine gelöscht!</string>
 
     <!-- Maintenance string -->
     <string name="delete_maintenance">Wartung löschen?</string>

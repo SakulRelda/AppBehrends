@@ -22,6 +22,10 @@ import java.io.FileOutputStream;
 import database.FirebaseHandler;
 import logical.RepairHistory;
 
+/**
+ * @author Artur Stalbaum
+ */
+
 public class MaintenanceActivity extends AppCompatActivity {
 
     private RepairHistory repHisto;
