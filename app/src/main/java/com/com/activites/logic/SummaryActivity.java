@@ -8,8 +8,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +66,11 @@ public class SummaryActivity extends AppCompatActivity {
     protected ProgressDialog progressBar;
     protected FirebaseUser user;
 
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
+    private ActionBarDrawerToggle drawerToggle;
+
     /**
      * Lifecycle Method for the Activity
      * @param savedInstanceState
@@ -75,6 +85,23 @@ public class SummaryActivity extends AppCompatActivity {
 
         accessFields();
         addTimer();
+
+        //side_nav_bar
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        drawerToggle = setupDrawerToggle();
+        mDrawer.addDrawerListener(drawerToggle);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
+        View header = nvDrawer.getHeaderView(0);
+        TextView menuTitle = (TextView) header.findViewById(R.id.side_menu_title);
+        //TODO: Den richtigen Loginnamen setzen
+        menuTitle.setText("Artur");
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+        //end
 
         //LIFETIME LISTENER FOR THE DATABASE
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://maschinance.firebaseio.com/Machine");
@@ -268,8 +295,9 @@ public class SummaryActivity extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+       // MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -282,6 +310,11 @@ public class SummaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+
+            case R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
+
             case R.id.logOutMenu:
                 FirebaseHandler h = FirebaseHandler.getInstance();
                 boolean logout = h.logOutUser();
@@ -387,4 +420,54 @@ public class SummaryActivity extends AppCompatActivity {
         AlertDialog alert = alertLog.create();
         alert.show();
     }
+
+    /**
+     * On SideNavBar menu click
+     * @param navigationView
+     */
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+
+                });
+
+    }
+
+    /**
+     * Menu
+     * @param menuItem
+     */
+    public void selectDrawerItem(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.logOutMenu:
+                onBackPressed();
+                break;
+            case R.id.addMachineTypeMenu:
+                Intent createMachineIntent = new Intent(SummaryActivity.this, CreateMachineActivity.class);
+                startActivityForResult(createMachineIntent, RESULT_CANCELED);
+                break;
+            case R.id.searchBarcodeMenu:
+                if(hasCamera()){
+                    barcodeSnap();
+                }
+                break;
+            default:
+        }
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(false);
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
 }
