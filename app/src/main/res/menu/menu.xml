@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:title="@string/action_logout"
-        android:id="@+id/logOutMenu" />
-    <item android:title="@string/create_machinetyp"
-        android:id="@+id/addMachineTypeMenu" />
-    <item android:title="@string/search_machine"
-        android:id="@+id/searchBarcodeMenu" />
+    <group android:id="@+id/main_menu">
+        <item
+            android:id="@+id/addMachineTypeMenu"
+            android:icon="@drawable/ic_edit"
+            android:title="@string/create_machinetyp" />
+        <item
+            android:id="@+id/searchBarcodeMenu"
+            android:icon="@drawable/ic_barcode"
+            android:title="@string/search_machine" />
+    </group>
+    <group android:id="@+id/logout">
+        <item
+            android:id="@+id/logOutMenu"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/action_logout" />
+    </group>
 </menu>

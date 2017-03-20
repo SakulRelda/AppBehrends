@@ -62,4 +62,5 @@
     <string name="login_progress">Ihre Anmeldung wird geprüft...</string>
     <string name="authentication">Authentifizierung</string>
     <string name="machine_download">Maschinen werden geladen...</string>
+
 </resources>
