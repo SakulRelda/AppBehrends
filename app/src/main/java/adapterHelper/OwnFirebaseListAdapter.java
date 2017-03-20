@@ -20,6 +20,8 @@ import java.util.List;
  */
 public abstract class OwnFirebaseListAdapter<T> extends BaseAdapter{
 
+    private MachineAdapter machineAdapter;
+    private MaintenanceAdapter maintenanceAdapter;
     private Query mRef;
     private Class<T> mModelClass;
     private int mLayout;
