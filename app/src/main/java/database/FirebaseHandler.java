@@ -99,6 +99,11 @@ public class FirebaseHandler {
         refDatabase.child("Maintenance").child(keyID).setValue(histo);
     }
 
+    public String getUserMail(){
+        String mail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String[] name = mail.split("@");
+        return name[0];
+    }
 
     /**
      * Logs Out the User

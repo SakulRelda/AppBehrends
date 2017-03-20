@@ -17,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -85,22 +84,11 @@ public class SummaryActivity extends AppCompatActivity {
 
         accessFields();
         addTimer();
+        toolbarHandler();
 
         //side_nav_bar
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        drawerToggle = setupDrawerToggle();
-        mDrawer.addDrawerListener(drawerToggle);
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        setupDrawerContent(nvDrawer);
-        View header = nvDrawer.getHeaderView(0);
-        TextView menuTitle = (TextView) header.findViewById(R.id.side_menu_title);
-        //TODO: Den richtigen Loginnamen setzen
-        menuTitle.setText("Artur");
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+
+
         //end
 
         //LIFETIME LISTENER FOR THE DATABASE
@@ -195,6 +183,24 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     /**
+     * Toolbar Handler Action
+     */
+    private void toolbarHandler(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        drawerToggle = setupDrawerToggle();
+        mDrawer.addDrawerListener(drawerToggle);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
+        View header = nvDrawer.getHeaderView(0);
+        TextView menuTitle = (TextView) header.findViewById(R.id.side_menu_title);
+        //TODO: Den richtigen Loginnamen setzen
+        menuTitle.setText(handler.getUserMail());
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+    }
+
+    /**
      * Access the View Fields
      */
     private void accessFields(){
@@ -202,6 +208,8 @@ public class SummaryActivity extends AppCompatActivity {
         floatingButton = (FloatingActionButton) findViewById(R.id.fab);
         linearLayout = (LinearLayout) findViewById(R.id.linearMachineLayout);
         list = (ListView) findViewById(R.id.listen);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         handler = FirebaseHandler.getInstance();
         user = handler.getFirebaseUser();

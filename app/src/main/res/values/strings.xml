@@ -54,7 +54,7 @@
     <string name="shortDescription">Kurzbeschreibung</string>
     <string name="overview">Überblick</string>
     <string name="maintenance_string">Wartungen</string>
-    <string name="create_machinetyp">Maschinentyp erstellen</string>
+    <string name="create_machinetyp">Maschine erstellen</string>
     <string name="search_machine">Maschine suchen</string>
     <string name="logout_question">Möchten Sie sich wirklich abmelden?</string>
     <string name="load_machine_string">Maschinen werden geladen</string>
