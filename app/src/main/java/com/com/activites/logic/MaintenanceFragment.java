@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import database.FirebaseHandler;
 import logical.Machine;
 import logical.RepairHistory;
 

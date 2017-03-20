@@ -16,7 +16,6 @@ public class RepairHistory implements Serializable{
     private String s_ID;
     private String s_Description;
     private String s_machineID;
-    private RepairImage r_image;
     private String s_author;
     private String s_shortDescr;
     private Bitmap image;
@@ -26,12 +25,11 @@ public class RepairHistory implements Serializable{
     public RepairHistory() {
     }
 
-    public RepairHistory(Date d_repairDate, String s_ID, String s_Description, String s_machineID, RepairImage r_image, String s_author, String s_shortDescr, Bitmap image) {
+    public RepairHistory(Date d_repairDate, String s_ID, String s_Description, String s_machineID, String s_author, String s_shortDescr, Bitmap image) {
         this.d_repairDate = d_repairDate;
         this.s_ID = s_ID;
         this.s_Description = s_Description;
         this.s_machineID = s_machineID;
-        this.r_image = r_image;
         this.s_author = s_author;
         this.s_shortDescr = s_shortDescr;
         this.image = image;
@@ -75,14 +73,6 @@ public class RepairHistory implements Serializable{
 
     public void setS_Description(String s_Description) {
         this.s_Description = s_Description;
-    }
-
-    public RepairImage getR_image() {
-        return r_image;
-    }
-
-    public void setR_image(RepairImage r_image) {
-        this.r_image = r_image;
     }
 
     public String getS_author() {

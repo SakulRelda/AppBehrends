@@ -1,6 +1,8 @@
 package com.google.zxing.integration.android;
 
 /**
+ * Done with a 3rd Party Library and a Tutorial
+ *
  * Created by LukasAdler on 26.02.17.
  */
 
