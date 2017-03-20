@@ -54,9 +54,9 @@ import database.FirebaseHandler;
 import logical.Machine;
 
 /**
- *
  * @author Lukas Adler / Artur Stalbaum
  */
+
 public class SummaryActivity extends AppCompatActivity {
 
     protected FloatingActionButton floatingButton;

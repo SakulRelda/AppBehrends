@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import database.FirebaseHandler;
 
 /**
+ * @author Artur Stalbaum
  * Sign Up Activity
  * Creating a new User
  */
