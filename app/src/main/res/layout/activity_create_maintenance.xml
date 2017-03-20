@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,12 +29,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:background="@color/accent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:textColorHint="@color/colorTeal"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
@@ -43,43 +44,38 @@
                     android:id="@+id/txtShortDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="10dp"
-                    android:maxLength="20"
-                    android:hint="@string/type_shortDescription"
+                    android:drawablePadding="10dp"
                     android:drawableStart="@drawable/ic_short_description"
-                    android:drawablePadding="8dp"
-                    android:theme="@style/EditTextStyle"/>
+                    android:hint="@string/type_shortDescription"
+                    android:maxLength="20"
+                    android:theme="@style/EditTextStyle" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:textColorHint="@color/colorTeal"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
 
-            <EditText
-                android:id="@+id/txtRepairDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
-                android:hint="@string/type_description"
-                android:drawableStart="@drawable/ic_description"
-                android:drawablePadding="8dp"
-                android:theme="@style/EditTextStyle"/>
+                <EditText
+                    android:id="@+id/txtRepairDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_description"
+                    android:hint="@string/type_description"
+                    android:theme="@style/EditTextStyle" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btnCreateMaintenance"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:theme="@style/ButtonStyleTeal"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/save"/>
+                android:layout_marginTop="20dp"
+                android:text="@string/save"
+                android:textStyle="bold"
+                android:theme="@style/ButtonStyleTeal" />
 
         </LinearLayout>
 

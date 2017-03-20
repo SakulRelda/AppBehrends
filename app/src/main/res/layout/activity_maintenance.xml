@@ -36,40 +36,61 @@
                 android:id="@+id/lblMaintenanceDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:text="@string/maintenance_date"
                 android:drawableStart="@drawable/ic_calendar"
-                android:drawablePadding="8dp"
+                android:drawablePadding="10dp"
                 android:textColor="@color/colorTeal"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/lblMaintenanceShort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
                 android:textStyle="bold"
                 android:text="@string/shortDescription"
                 android:textSize="20dp"
                 android:drawableStart="@drawable/ic_short_description"
-                android:drawablePadding="8dp"
+                android:drawablePadding="10dp"
                 android:textColor="@color/colorTeal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/lblMaintenanceDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
                 android:textStyle="bold"
                 android:text="@string/descritpion"
                 android:textSize="20dp"
                 android:drawableStart="@drawable/ic_description"
-                android:drawablePadding="8dp"
+                android:drawablePadding="10dp"
                 android:textColor="@color/colorTeal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary"/>
 
         </LinearLayout>
 
