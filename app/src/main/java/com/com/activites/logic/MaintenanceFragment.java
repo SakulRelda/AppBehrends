@@ -107,7 +107,7 @@ public class MaintenanceFragment extends android.app.Fragment {
                                 //DELETE PRESS YES
                                 FirebaseHandler h = FirebaseHandler.getInstance();
                                 h.deleteMaintenance(model);
-                                Toast.makeText(getActivity(),"DELETED",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),R.string.maintenance_deleted,Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {

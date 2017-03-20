@@ -58,4 +58,12 @@
     <string name="search_machine">Maschine suchen</string>
     <string name="logout_question">Möchten Sie sich wirklich abmelden?</string>
     <string name="load_machine_string">Maschinen werden geladen</string>
+    <string name="maintenance_deleted">Wartung gelöscht</string>
+    <string name="login_progress">Ihre Anmeldung wird geprüft...</string>
+    <string name="authentication">Authentifizierung</string>
+    <string name="machine_download">Maschinen werden geladen...</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

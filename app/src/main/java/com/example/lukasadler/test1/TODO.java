@@ -9,5 +9,6 @@ public class TODO {
 
     //TODO: Spinner (Dropdown) für Maschinentyp
     //TODO: Filter in der Maschinenübersicht für die Suche?
+    //TODO: Den richtigen Loginnamen setzen in der Nav_bar -> summaryActivity
 
 }
