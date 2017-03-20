@@ -218,15 +218,15 @@ public class CreateMachineActivity extends AppCompatActivity {
         boolean retVal = true;
         StringBuilder builder = new StringBuilder();
         if(isEmpty(s_machineName)){
-            builder.append("EMPTY MACHINE NAME \n");
+            builder.append(getResources().getString(R.string.type_machine_name) +" \n");
             retVal=false;
         }
         if(isEmpty(s_machineType)){
-            builder.append("EMPTY MACHINE TYPE \n");
+            builder.append(getResources().getString(R.string.type_machine_type) +" \n");
             retVal = false;
         }
         if(isEmpty(s_machineLocation)){
-            builder.append("EMPTY MACHINE LOCATION \n");
+            builder.append( getResources().getString(R.string.type_machine_location) + " \n");
             retVal = false;
         }
         if(retVal==false){

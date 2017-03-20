@@ -113,7 +113,7 @@ public class MaintenanceFragment extends android.app.Fragment {
                         dia.setNegativeButton(R.string.nein_text, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 //DELETE PRESS NO
-                                Toast.makeText(getActivity(), "ABGEBROCHEN", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.machineAbortDelete, Toast.LENGTH_SHORT).show();
                             }
                         });
                         dia.show();
