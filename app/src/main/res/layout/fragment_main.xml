@@ -1,8 +1,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:design="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    xmlns:design="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayoutOverview"
@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">>
 
-            <ListView
-                android:id="@+id/listMaintenance"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/colorTeal"
-                android:dividerHeight="4px" />
+        <ListView
+            android:id="@+id/listMaintenance"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorTeal"
+            android:dividerHeight="4px" />
 
     </LinearLayout>
 
