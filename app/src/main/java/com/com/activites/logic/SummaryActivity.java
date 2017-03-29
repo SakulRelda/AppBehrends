@@ -188,7 +188,9 @@ public class SummaryActivity extends AppCompatActivity {
     private void toolbarHandler(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        toolbar.setNavigationIcon(R.drawable.ic_nav_menu);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+
         drawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(drawerToggle);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -197,7 +199,7 @@ public class SummaryActivity extends AppCompatActivity {
         TextView menuTitle = (TextView) header.findViewById(R.id.side_menu_title);
         //TODO: Den richtigen Loginnamen setzen
         menuTitle.setText(handler.getUserMail());
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+
     }
 
     /**

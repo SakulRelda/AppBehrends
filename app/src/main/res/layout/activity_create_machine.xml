@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/linearLayoutMachine"
@@ -32,43 +37,27 @@
             android:layout_height="match_parent"
             android:layout_weight="0.4"
             android:background="@color/accent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="30dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:textColorHint="@color/colorTeal"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-            <EditText
-                android:id="@+id/machineName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="15"
-                android:layout_marginLeft="10dp"
-                android:imeOptions="actionNext"
-                android:hint="@string/type_machine_name"
-                android:theme="@style/EditTextStyle"
-                android:drawableStart="@drawable/ic_name"
-                android:drawablePadding="8dp" />
-        </android.support.design.widget.TextInputLayout>
-            
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/colorTeal"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-            <EditText
-                android:id="@+id/machineTyp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:maxLength="30"
-                android:imeOptions="actionNext"
-                android:hint="@string/type_machine_type"
-                android:drawableStart="@drawable/ic_type"
-                android:drawablePadding="8dp"
-                android:theme="@style/EditTextStyle"/>
+
+                <EditText
+                    android:id="@+id/machineName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_name"
+                    android:hint="@string/type_machine_name"
+                    android:imeOptions="actionNext"
+                    android:maxLength="15"
+                    android:theme="@style/EditTextStyle" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -76,33 +65,51 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorTeal"
                 app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
-            <EditText
-                android:id="@+id/machineLocation"
+
+                <EditText
+                    android:id="@+id/machineTyp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_type"
+                    android:hint="@string/type_machine_type"
+                    android:imeOptions="actionNext"
+                    android:maxLength="30"
+                    android:theme="@style/EditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:maxLength="30"
-                android:imeOptions="actionGo"
-                android:hint="@string/type_machine_location"
-                android:drawableStart="@drawable/ic_location"
-                android:drawablePadding="8dp"
-                android:theme="@style/EditTextStyle" />
+                android:textColorHint="@color/colorTeal"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/machineLocation"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_location"
+                    android:hint="@string/type_machine_location"
+                    android:imeOptions="actionGo"
+                    android:maxLength="30"
+                    android:theme="@style/EditTextStyle" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnCreateMachine"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:theme="@style/ButtonStyleTeal"
                     android:layout_gravity="center"
-                    android:text="@string/save" />
+                    android:text="@string/save"
+                    android:textStyle="bold"
+                    android:theme="@style/ButtonStyleTeal" />
             </LinearLayout>
 
         </LinearLayout>

@@ -14,15 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:srcCompat="@drawable/ic_main_black" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="20dp">
+
             <TextView
                 android:id="@+id/listItemMaintenanceTitle"
                 android:layout_width="wrap_content"
@@ -30,14 +33,15 @@
                 android:text="hallo"
                 android:textColor="@color/colorTeal"
                 android:textSize="48px"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txtShortDescItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="20"
                 android:ems="9"
-                android:text="Sonstige Informationen"/>
+                android:maxLength="20"
+                android:text="Sonstige Informationen" />
         </LinearLayout>
 
         <ImageView
@@ -47,7 +51,7 @@
             android:paddingLeft="100dp"
             android:src="@android:drawable/ic_delete"
             app:layout_anchor="@id/txtShortDescription"
-            app:layout_anchorGravity="right|end"/>
+            app:layout_anchorGravity="right|end" />
     </LinearLayout>
 
 </RelativeLayout>
