@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
         logInButton = (Button) findViewById(R.id.email_sign_in_button);
 
 
-        emailEditText.setText("sakulrelda@aol.com");
-        passwordEditText.setText("71292al");
+        emailEditText.setText("behrends@dhbw.de");
+        passwordEditText.setText("123456");
 
         progressBar = new ProgressDialog(this);
         String s_auth = getResources().getString(R.string.authentication);
