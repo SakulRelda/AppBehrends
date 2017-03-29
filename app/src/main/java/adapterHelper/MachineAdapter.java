@@ -12,6 +12,7 @@ import logical.Machine;
 
 /**
  * Created by LukasAdler on 16.02.17.
+ * Extends from Firebase
  */
 
 public class MachineAdapter extends OwnFirebaseListAdapter<Machine>{
